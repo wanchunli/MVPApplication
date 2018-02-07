@@ -78,7 +78,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         customViewPagerAdapter.addFragment(new ToolsFragment());
         customViewPagerAdapter.addFragment(new UserFragment());
         mainPager.setAdapter(customViewPagerAdapter);
-        mainPager.setCurrentItem(customViewPagerAdapter.TAB_PLATFORM, false);
+        mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_PLATFORM, false);
         mainPager.addOnPageChangeListener(this);
         switchItem(0);
 
@@ -102,24 +102,28 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 startActivity(it);
                 break;
             case R.id.platform_layout:
+                mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_PLATFORM, false);
                 platformLayout.setSelected(true);
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
                 break;
             case R.id.message_layout:
+                mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_MESSAGE, false);
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(true);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
                 break;
             case R.id.tools_layout:
+                mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_TOOLS, false);
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(true);
                 personLayout.setSelected(false);
                 break;
             case R.id.person_layout:
+                mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_USER, false);
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
