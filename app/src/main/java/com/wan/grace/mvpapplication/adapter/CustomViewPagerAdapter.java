@@ -14,6 +14,11 @@ import java.util.List;
 public class CustomViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragments = new ArrayList<>();
 
+    public static final int TAB_PLATFORM = 0;
+    public static final int TAB_MESSAGE = 1;
+    public static final int TAB_TOOLS = 2;
+    public static final int TAB_USER = 3;
+
     public CustomViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }

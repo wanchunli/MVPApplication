@@ -7,9 +7,7 @@
     android:orientation="vertical"
     tools:context="com.wan.grace.mvpapplication.ui.main.MainActivity">
 
-    <include
-        layout="@layout/toolsbar"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <include layout="@layout/toolsbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +25,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="1dp"
             android:layout_above="@+id/main_menu"
             android:background="@color/dimgray" />
 
@@ -39,7 +37,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:id="@+id/homepage_layout"
+                android:id="@+id/platform_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -52,7 +50,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/setting_layout"
+                android:id="@+id/message_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -65,7 +63,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/warning_layout"
+                android:id="@+id/tools_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">

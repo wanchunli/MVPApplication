@@ -1,6 +1,5 @@
-package com.wan.grace.mvpapplication.ui.fragment.message;
+package com.wan.grace.mvpapplication.ui.fragment.user;
 
-import android.app.Fragment;
 import android.os.Bundle;
 
 import com.wan.grace.mvpapplication.R;
@@ -10,16 +9,16 @@ import com.wan.grace.mvpapplication.base.MVPBaseFragment;
  * Created by 开发部 on 2018/2/7.
  */
 
-public class MessageFragment extends MVPBaseFragment<MessageView,MessagePresenter> implements MessageView{
+public class UserFragment extends MVPBaseFragment<UserView,UserPresenter> implements UserView {
 
     @Override
-    protected MessagePresenter createPresenter() {
-        return new MessagePresenter(getActivity());
+    protected UserPresenter createPresenter() {
+        return new UserPresenter(getActivity());
     }
 
     @Override
     protected int createViewLayoutId() {
-        return R.layout.fragment_message;
+        return R.layout.fragment_user;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class MessageFragment extends MVPBaseFragment<MessageView,MessagePresente
     }
 
     @Override
-    public void setPresenter(MessagePresenter presenter) {
+    public void setPresenter(UserPresenter presenter) {
 
     }
 }

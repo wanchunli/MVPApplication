@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  * Contact Me : werbhelius@gmail.com
  * Base of Fragment
  */
-public abstract class MVPBaseFragment<V, T extends BaseClazzPresenter<V>> extends Fragment {
+public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fragment {
 
     protected T mPresenter;
 
@@ -31,8 +31,8 @@ public abstract class MVPBaseFragment<V, T extends BaseClazzPresenter<V>> extend
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(createViewLayoutId(),container,false);
-        ButterKnife.bind(this,rootView);
+        View rootView = inflater.inflate(createViewLayoutId(), container, false);
+        ButterKnife.bind(this, rootView);
         initView(rootView);
         return rootView;
     }
@@ -47,9 +47,10 @@ public abstract class MVPBaseFragment<V, T extends BaseClazzPresenter<V>> extend
 
     protected abstract int createViewLayoutId();
 
-    protected  void initView(View rootView){}
+    protected void initView(View rootView) {
+    }
 
-    public Boolean isSetRefresh(){
+    public Boolean isSetRefresh() {
         return true;
     }
 

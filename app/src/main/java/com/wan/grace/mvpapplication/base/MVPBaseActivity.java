@@ -37,13 +37,13 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         //允许为空，不是所有都要实现MVP模式
         if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }
         setContentView(provideContentViewId());//布局
+        ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置
@@ -53,6 +53,21 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                     actionBar.setDisplayHomeAsUpEnabled(true);//设置ActionBar一个返回箭头，主界面没有，次级界面有
             }
         }
+        initViews();
+    }
+
+    public void initViews(){
+
+    }
+
+    public void initToolBar(Toolbar toolbar, String name, boolean showHomeAsUp, boolean isShowRight) {
+        initToolBar(toolbar, name, showHomeAsUp, isShowRight, 0);
+    }
+
+    public void initToolBar(Toolbar toolbar, String name, boolean showHomeAsUp, boolean isShowRight, int rightType) {
+        toolbar.setTitle(name);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
     }
 
     @Override

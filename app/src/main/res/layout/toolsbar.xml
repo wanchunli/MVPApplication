@@ -15,8 +15,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:minHeight="?attr/actionBarSize">
+        style="@style/ToolbarStyle">
 
         <!--android:background="@color/theme_color_primary"-->
 
@@ -29,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/platform"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -39,18 +38,18 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/contact_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignLeft="@+id/more_layout"
                     android:layout_alignParentRight="true"
-                    android:visibility="gone"
                     android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:src="@mipmap/more_action" />
+                        android:src="@mipmap/icon_contact_fill" />
 
                 </RelativeLayout>
 
