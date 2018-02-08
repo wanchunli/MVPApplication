@@ -144,7 +144,6 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
 
     @Override
     public void onPageScrollStateChanged(int state) {
-//        switchItem(state);
     }
 
     /*
