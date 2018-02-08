@@ -12,13 +12,18 @@
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AppTheme.Translucent" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@mipmap/cat</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.ActionBar">
         <item name="android:minHeight">@dimen/toolbar_minHeight</item>
     </style>
 
-    <style name="AnimTools" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_in</item>
-        <item name="android:windowExitAnimation">@anim/push_out</item>
+    <style name="popu_add">
+        <item name="android:windowEnterAnimation">@anim/popu_show</item>
+        <item name="android:windowExitAnimation">@anim/popu_hide</item>
     </style>
 
 

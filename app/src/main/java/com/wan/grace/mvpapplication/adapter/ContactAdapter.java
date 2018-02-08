@@ -1,11 +1,13 @@
 package com.wan.grace.mvpapplication.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.bean.ContactBean;
@@ -26,11 +28,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
     // declare the color generator and drawable builder
     private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
     private TextDrawable.IBuilder mDrawableBuilder = TextDrawable.builder().round();
-
+    private OnItemClickListener onItemClickListener;
     public ContactAdapter(Context context) {
         this.mContext = context;
         contactBeanList = new ArrayList<>();
     }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
 
     public void addAll(List<ContactBean> beans) {
         if (contactBeanList.size() > 0) {
@@ -57,7 +72,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
     }
 
     @Override
-    public void onBindViewHolder(MyRecycleHolder holder, int position) {
+    public void onBindViewHolder(MyRecycleHolder holder, final int position) {
         if (contactBeanList == null || contactBeanList.size() == 0 || contactBeanList.size() <= position)
             return;
         ContactBean bean = contactBeanList.get(position);
@@ -66,6 +81,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
             TextDrawable drawable = mDrawableBuilder.build(String.valueOf(bean.getName().charAt(0)), mColorGenerator.getColor(bean.getName()));
             holder.iv_img.setImageDrawable(drawable);
         }
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getOnItemClickListener() != null){
+                    getOnItemClickListener().onItemClickListener(v,position);
+                }
+            }
+        });
     }
 
     @Override
@@ -76,11 +99,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
     public static class MyRecycleHolder extends RecyclerView.ViewHolder {
         public final TextView tv_name;
         public final ImageView iv_img;
+        public RelativeLayout rootView;
 
         public MyRecycleHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
+            rootView = (RelativeLayout) itemView.findViewById(R.id.root_view);
         }
     }
 }
