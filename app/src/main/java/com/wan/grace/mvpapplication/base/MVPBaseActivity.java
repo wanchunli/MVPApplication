@@ -155,6 +155,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             case Constants.READ_EXTERNAL_CODE:
                 doReadPermission();
                 break;
+            case Constants.READ_CONTACT_CODE:
+                doReadContactPermission();
+                break;
         }
 
     }
@@ -170,6 +173,13 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
      * 默认读内存的权限
      */
     public void doReadPermission(){
+
+    }
+
+    /**
+     * 默认读联系人的权限
+     */
+    public void doReadContactPermission(){
 
     }
 }

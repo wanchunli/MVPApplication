@@ -15,7 +15,22 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/ToolbarStyle">
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/platform"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
         <!--android:background="@color/theme_color_primary"-->
 
@@ -43,6 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignLeft="@+id/more_layout"
                     android:layout_alignParentRight="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="10dp">
 
                     <ImageView
@@ -58,18 +74,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:src="@mipmap/more_action" />
+                        android:src="@mipmap/plus" />
 
                 </RelativeLayout>
             </LinearLayout>
-
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </RelativeLayout>
 
 </RelativeLayout>
