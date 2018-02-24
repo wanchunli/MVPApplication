@@ -11,15 +11,16 @@ import com.wan.grace.mvpapplication.base.BasePresenter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.view.ChaosCompassView;
 
-import butterknife.BindView;
+/**
+ * Created by hasee on 2018/2/9.
+ */
+
 /**
  * Compass 指南针
  */
 public class CompassActivity extends MVPBaseActivity {
     private SensorManager mSensorManager;
     private SensorEventListener mSensorEventListener;
-
-    @BindView(R.id.ccv)
     private ChaosCompassView chaosCompassView;
     private float val;
 
@@ -42,10 +43,8 @@ public class CompassActivity extends MVPBaseActivity {
     @Override
     public void initViews() {
         super.initViews();
-
+        chaosCompassView = (ChaosCompassView) findViewById(R.id.ccv);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mSensorManager.registerListener(mSensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_GAME);
         mSensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
@@ -58,6 +57,8 @@ public class CompassActivity extends MVPBaseActivity {
 
             }
         };
+        mSensorManager.registerListener(mSensorEventListener,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+                SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
