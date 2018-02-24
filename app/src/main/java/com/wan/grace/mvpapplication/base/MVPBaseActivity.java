@@ -1,15 +1,12 @@
 package com.wan.grace.mvpapplication.base;
 
-import android.content.ComponentName;
-import android.content.ServiceConnection;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +25,7 @@ import butterknife.ButterKnife;
  * Contact Me : werbhelius@gmail.com
  * Base of Activity
  */
-public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity{
+public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
     protected T mPresenter;
     protected Toolbar mToolbar;
@@ -56,7 +53,7 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         initViews();
     }
 
-    public void initViews(){
+    public void initViews() {
 
     }
 
@@ -123,13 +120,14 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     /**
      * 检查权限方法
+     *
      * @param permissions
      * @return
      */
     public boolean hasPermissions(String... permissions) {
         for (String permission : permissions) {
-            if(ContextCompat.checkSelfPermission(this,permission)!=
-                    PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(this, permission) !=
+                    PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
@@ -138,17 +136,40 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     /**
      * 权限请求方法
+     *
      * @param code
      * @param permissions
      */
-    public void requestPersions(int code,String... permissions){
-        ActivityCompat.requestPermissions(this,permissions,code);
+    public void requestPermissions(int code, String... permissions) {
+        ActivityCompat.requestPermissions(this, permissions, code);
+    }
+
+    public void settingPermission(int code, String permission) {
+        // 没有获得授权，申请授权
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                permission)) {
+            // 返回值：
+            //如果app之前请求过该权限,被用户拒绝, 这个方法就会返回true.
+            //如果用户之前拒绝权限的时候勾选了对话框中”Don’t ask again”的选项,那么这个方法会返回false.
+            //如果设备策略禁止应用拥有这条权限, 这个方法也返回false.
+            // 弹窗需要解释为何需要该权限，再次请求授权
+            Toast.makeText(this, "请授权！", Toast.LENGTH_LONG).show();
+            // 帮跳转到该应用的设置界面，让用户手动授权
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
+        } else {
+            // 不需要解释为何需要该权限，直接请求授权
+            ActivityCompat.requestPermissions(this, new String[]{permission},
+                    code);
+        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
             case Constants.WRITE_EXTERNAL_CODE:
                 doWritePermission();
                 break;
@@ -156,7 +177,11 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 doReadPermission();
                 break;
             case Constants.READ_CONTACT_CODE:
-                doReadContactPermission();
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    doReadContactPermission();
+                } else {
+                }
                 break;
         }
 
@@ -165,21 +190,22 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     /**
      * 默认写内存的权限
      */
-    public void doWritePermission(){
+
+    public void doWritePermission() {
 
     }
 
     /**
      * 默认读内存的权限
      */
-    public void doReadPermission(){
+    public void doReadPermission() {
 
     }
 
     /**
      * 默认读联系人的权限
      */
-    public void doReadContactPermission(){
+    public void doReadContactPermission() {
 
     }
 }

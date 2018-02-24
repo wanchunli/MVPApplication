@@ -17,6 +17,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.ActionBar">
         <item name="android:minHeight">@dimen/toolbar_minHeight</item>
     </style>
@@ -24,6 +28,10 @@
     <style name="popu_add">
         <item name="android:windowEnterAnimation">@anim/popu_show</item>
         <item name="android:windowExitAnimation">@anim/popu_hide</item>
+    </style>
+
+    <style name="ToolbarTitleStyle" >
+        <item name="android:layout_centerInParent">true</item>
     </style>
 
 
