@@ -25,6 +25,13 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+    maven { // this is for realm-db
+        url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -48,4 +55,8 @@ dependencies {
     compile 'com.github.promeg:tinypinyin:2.0.3'
     compile 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     implementation project(':mzbanner')
+    implementation 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
+    implementation project(':MPChartLib')
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-2'
+    compile 'com.github.mmin18:realtimeblurview:1.0.6'
 }
