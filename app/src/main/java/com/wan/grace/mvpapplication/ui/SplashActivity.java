@@ -26,6 +26,7 @@ public class SplashActivity extends MVPBaseActivity {
         super.onCreate(savedInstanceState);
         Intent it = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(it);
+        finish();
     }
 
     @Override
