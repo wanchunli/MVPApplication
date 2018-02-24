@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.base.MVPBaseFragment;
+import com.wan.grace.mvpapplication.bean.Movie;
+import com.wan.grace.mvpapplication.bean.MovieSubject;
 import com.wan.grace.mvpapplication.ui.fragment.banner.BannerViewHolder;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -82,32 +84,33 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
 
             }
         });
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < RES.length; i++) {
-            list.add(RES[i]);
-        }
-
-        List<Integer> bannerList = new ArrayList<>();
-        for (int i = 0; i < BANNER.length; i++) {
-            bannerList.add(BANNER[i]);
-        }
-        mMZBanner.setIndicatorVisible(true);
-        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
-            @Override
-            public BannerViewHolder createViewHolder() {
-                return new BannerViewHolder();
-            }
-        });
+//        List<Integer> list = new ArrayList<>();
+//        for (int i = 0; i < RES.length; i++) {
+//            list.add(RES[i]);
+//        }
+//
+//        List<Integer> bannerList = new ArrayList<>();
+//        for (int i = 0; i < BANNER.length; i++) {
+//            bannerList.add(BANNER[i]);
+//        }
+//        mMZBanner.setIndicatorVisible(true);
+//        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
+//            @Override
+//            public BannerViewHolder createViewHolder() {
+//                return new BannerViewHolder();
+//            }
+//        });
+        mPresenter.getMovieBanner();
     }
 
     @Override
-    public void setDate(String dateStr) {
-
+    public void setDate(String dateStr, MovieSubject movieSubject) {
+        setBanner(movieSubject.subjects);
     }
 
     @Override
     public void setPresenter(PlatFormPresenter presenter) {
-
+        mPresenter = presenter;
     }
 
     @Override
@@ -125,6 +128,16 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     @Override
     public void onResume() {
         super.onResume();
+//        mMZBanner.start();
+    }
+
+    private void setBanner(List<Movie> movies){
+        mMZBanner.setPages(movies, new MZHolderCreator<BannerViewHolder>() {
+            @Override
+            public BannerViewHolder createViewHolder() {
+                return new BannerViewHolder();
+            }
+        });
         mMZBanner.start();
     }
 }
