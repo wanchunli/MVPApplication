@@ -23,6 +23,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 repositories {
@@ -59,5 +60,5 @@ dependencies {
     implementation project(':MPChartLib')
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-2'
     compile 'com.github.mmin18:realtimeblurview:1.0.6'
-    implementation project(':rxcache')
+//    implementation project(':rxcache')
 }
