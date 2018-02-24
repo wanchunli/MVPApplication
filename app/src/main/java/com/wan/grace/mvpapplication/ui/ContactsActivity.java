@@ -11,12 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.ContactAdapter;
-import com.wan.grace.mvpapplication.base.BasePresenter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.bean.ContactBean;
 import com.wan.grace.mvpapplication.constants.Constants;
@@ -84,7 +82,8 @@ public class ContactsActivity extends MVPBaseActivity<ContactView,ContactPresent
             mPresenter.getContacts();
 //            getContacts();
         } else {
-            requestPersions(Constants.READ_CONTACT_CODE, Manifest.permission.READ_CONTACTS);
+            settingPermission(Constants.READ_CONTACT_CODE,Manifest.permission.READ_CONTACTS);
+//            requestPermissions(Constants.READ_CONTACT_CODE, Manifest.permission.READ_CONTACTS);
         }
     }
 
