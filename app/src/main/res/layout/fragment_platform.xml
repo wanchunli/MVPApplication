@@ -9,6 +9,7 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="5dp"
         app:srlDragRate="1"
         app:srlEnableLoadMore="true"
         app:srlEnablePureScrollMode="true">
@@ -22,7 +23,7 @@
             app:indicatorPaddingLeft="10dp"
             app:isShowIndictor="false"
             app:middle_page_cover="true"
-            app:open_mz_mode="false" />
+            app:open_mz_mode="true" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
