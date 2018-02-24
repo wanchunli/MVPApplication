@@ -165,4 +165,9 @@
     <color name="gray9">#d0d0d0</color> <!-- 自定义灰色 -->
 
     <color name="full_transparent">#00000000</color>
+
+    <color name="darkRed">#702216</color>
+    <color name="lightGray">#323232</color>
+    <color name="deepGray">#8B8B8B</color>
+    <color name="ocbg">#237EAD</color>
 </resources>
