@@ -87,7 +87,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         //状态栏透明和间距处理
         StatusBarUtil.immersive(this);
         StatusBarUtil.setPaddingSmart(this, blurview);
-        StatusBarUtil.setPaddingSmart(this, mToolbar);
+//        StatusBarUtil.setPaddingSmart(this, mToolbar);
     }
 
     private void initView() {

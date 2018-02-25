@@ -11,11 +11,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.constants.Constants;
+
+import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
 
@@ -42,6 +46,7 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         setContentView(provideContentViewId());//布局
         ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        reSetToolbarHeight(mToolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置
             if (canBack()) {
@@ -65,6 +70,25 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         toolbar.setTitle(name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
+    }
+
+    public void reSetToolbarHeight(Toolbar toolbar) {
+        try {
+            Field f = Toolbar.class.getDeclaredField("mNavButtonView");
+            f.setAccessible(true);
+            ImageButton mNavButtonView = (ImageButton) f.get(toolbar);
+            if (mNavButtonView != null) {
+                Toolbar.LayoutParams l = (Toolbar.LayoutParams) mNavButtonView.getLayoutParams();
+                l.gravity = Gravity.CENTER_VERTICAL;
+                l.height += 100;
+                l.width += 100;
+                mNavButtonView.setLayoutParams(l);
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
