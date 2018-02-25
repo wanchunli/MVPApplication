@@ -48,6 +48,6 @@ public class PlatFormPresenter extends BasePresenter<PlatFormView> {
 
     private void loadError(Throwable throwable) {
         throwable.printStackTrace();
-        Toast.makeText(context, R.string.app_name, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, R.string.app_name, Toast.LENGTH_SHORT).show();
     }
 }

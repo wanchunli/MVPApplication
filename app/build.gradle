@@ -48,4 +48,5 @@ dependencies {
     compile 'com.github.promeg:tinypinyin:2.0.3'
     compile 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     implementation project(':mzbanner')
+
 }

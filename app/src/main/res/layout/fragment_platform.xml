@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="5dp"
     android:orientation="vertical">
 
     <com.zhouwei.mzbanner.MZBannerView
@@ -15,7 +16,6 @@
         app:indicatorAlign="center"
         app:indicatorPaddingLeft="10dp"
         app:middle_page_cover="true"
-        app:open_mz_mode="false" />
-
+        app:open_mz_mode="true" />
 
 </LinearLayout>

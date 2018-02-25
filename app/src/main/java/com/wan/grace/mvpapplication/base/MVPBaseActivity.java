@@ -1,8 +1,10 @@
 package com.wan.grace.mvpapplication.base;
 
 import android.content.ComponentName;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.constants.Constants;
+import com.wan.grace.mvpapplication.receiver.NetWorkStateReceiver;
 
 import butterknife.ButterKnife;
 
@@ -33,6 +36,7 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     protected T mPresenter;
     protected Toolbar mToolbar;
     private String TAG = "MVPBaseActivity";
+    NetWorkStateReceiver netWorkStateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,5 +185,24 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
      */
     public void doReadContactPermission(){
 
+    }
+
+    //在onResume()方法注册
+    @Override
+    protected void onResume() {
+//        if (netWorkStateReceiver == null) {
+//            netWorkStateReceiver = new NetWorkStateReceiver();
+//        }
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+//        registerReceiver(netWorkStateReceiver, filter);
+        super.onResume();
+    }
+
+    //onPause()方法注销
+    @Override
+    protected void onPause() {
+//        unregisterReceiver(netWorkStateReceiver);
+        super.onPause();
     }
 }

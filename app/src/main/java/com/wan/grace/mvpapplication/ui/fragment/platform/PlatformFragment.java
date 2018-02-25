@@ -128,7 +128,7 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     @Override
     public void onResume() {
         super.onResume();
-//        mMZBanner.start();
+        mMZBanner.start();
     }
 
     private void setBanner(List<Movie> movies){
