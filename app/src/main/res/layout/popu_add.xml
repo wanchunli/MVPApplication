@@ -8,54 +8,57 @@
         android:layout_height="wrap_content"
         android:background="@drawable/icon_other_9"
         android:orientation="vertical"
-        android:layout_marginRight="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp">
+        android:layout_marginRight="5dp">
 
         <TextView
             android:id="@+id/tv_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="指南针"
+            android:background="?attr/selectableItemBackground"
             android:textColor="@color/white"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tv_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="?attr/selectableItemBackground"
             android:text="添加朋友"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="?attr/selectableItemBackground"
             android:text="扫一扫"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="?attr/selectableItemBackground"
             android:text="收付款"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="?android:attr/selectableItemBackground"
             android:text="帮助与反馈"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
     </LinearLayout>
 
 </LinearLayout>

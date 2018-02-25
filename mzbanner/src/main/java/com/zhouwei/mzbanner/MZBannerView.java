@@ -120,8 +120,7 @@ public class MZBannerView<T> extends RelativeLayout {
             view = LayoutInflater.from(getContext()).inflate(R.layout.mz_banner_normal_layout,this,true);
         }
       mIndicatorContainer = (LinearLayout) view.findViewById(R.id.banner_indicator_container);
-        setIndicatorVisible(mIsShowIndictor);
-        mViewPager = (CustomViewPager) view.findViewById(R.id.mzbanner_vp);
+      mViewPager = (CustomViewPager) view.findViewById(R.id.mzbanner_vp);
       mViewPager.setOffscreenPageLimit(4);
 
       mMZModePadding = dpToPx(30);

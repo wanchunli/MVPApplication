@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.bean.Movie;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -26,7 +27,8 @@ public class BannerViewHolder implements MZViewHolder<Movie> {
     @Override
     public void onBind(Context context, int position, Movie movie) {
         // 数据绑定
-        Glide.with(context).load(movie.images.large).into(mImageView);
+        Glide.with(context).load(movie.images.large)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(mImageView);
     }
 
 //    @Override

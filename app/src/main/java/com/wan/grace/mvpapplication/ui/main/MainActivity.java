@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.mmin18.widget.RealtimeBlurView;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
@@ -37,11 +38,11 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     RelativeLayout contactLayout;
     @BindView(R.id.more_layout)
     RelativeLayout moreLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.tools_title)
+    TextView toolsTitle;
     @BindView(R.id.main_pager)
     CustomViewPager mainPager;
-    private CustomViewPagerAdapter customViewPagerAdapter;
+    CustomViewPagerAdapter customViewPagerAdapter;
     @BindView(R.id.platform_layout)
     RelativeLayout platformLayout;
     @BindView(R.id.message_layout)
@@ -58,6 +59,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     RelativeLayout personLayout;
     @BindView(R.id.main_menu)
     LinearLayout mainMenu;
+    @BindView(R.id.blurview)
+    RealtimeBlurView blurview;
 
     private PopupWindow mPopupWindow;
     private AnimUtil animUtil;
@@ -80,11 +83,11 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
         //状态栏透明和间距处理
         StatusBarUtil.immersive(this);
-        StatusBarUtil.setPaddingSmart(this, mToolbar);
-//        StatusBarUtil.setPaddingSmart(this, findViewById(R.id.blurview));
-        initView();
+        StatusBarUtil.setPaddingSmart(this, blurview);
+//        StatusBarUtil.setPaddingSmart(this, mToolbar);
     }
 
     private void initView() {
@@ -102,6 +105,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         mainPager.setAdapter(customViewPagerAdapter);
         mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_PLATFORM, false);
         mainPager.addOnPageChangeListener(this);
+        mainPager.setOffscreenPageLimit(4);
         switchItem(0);
 
         //初始化popuwindow
@@ -137,6 +141,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.platform));
+                contactLayout.setVisibility(View.GONE);
                 break;
             case R.id.message_layout:
                 mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_MESSAGE, false);
@@ -144,6 +150,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 messageLayout.setSelected(true);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.message));
+                contactLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.tools_layout:
                 mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_TOOLS, false);
@@ -151,6 +159,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(true);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.tools));
+                contactLayout.setVisibility(View.GONE);
                 break;
             case R.id.person_layout:
                 mainPager.setCurrentItem(CustomViewPagerAdapter.TAB_USER, false);
@@ -158,6 +168,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(true);
+                toolsTitle.setText(getString(R.string.me));
+                contactLayout.setVisibility(View.GONE);
                 break;
         }
     }
@@ -186,24 +198,32 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.platform));
+                contactLayout.setVisibility(View.GONE);
                 break;
             case CustomViewPagerAdapter.TAB_MESSAGE:
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(true);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.message));
+                contactLayout.setVisibility(View.VISIBLE);
                 break;
             case CustomViewPagerAdapter.TAB_TOOLS:
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(true);
                 personLayout.setSelected(false);
+                toolsTitle.setText(getString(R.string.tools));
+                contactLayout.setVisibility(View.GONE);
                 break;
             case CustomViewPagerAdapter.TAB_USER:
                 platformLayout.setSelected(false);
                 messageLayout.setSelected(false);
                 toolsLayout.setSelected(false);
                 personLayout.setSelected(true);
+                toolsTitle.setText(getString(R.string.me));
+                contactLayout.setVisibility(View.GONE);
                 break;
         }
     }
@@ -232,6 +252,42 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         });
         TextView compassTextview = mPopupWindow.getContentView().findViewById(R.id.tv_1);
         compassTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(it);
+                mPopupWindow.dismiss();
+            }
+        });
+        TextView tv2 = mPopupWindow.getContentView().findViewById(R.id.tv_2);
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(it);
+                mPopupWindow.dismiss();
+            }
+        });
+        TextView tv3 = mPopupWindow.getContentView().findViewById(R.id.tv_3);
+        tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(it);
+                mPopupWindow.dismiss();
+            }
+        });
+        TextView tv4 = mPopupWindow.getContentView().findViewById(R.id.tv_4);
+        tv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(it);
+                mPopupWindow.dismiss();
+            }
+        });
+        TextView tv5 = mPopupWindow.getContentView().findViewById(R.id.tv_5);
+        tv5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, CompassActivity.class);

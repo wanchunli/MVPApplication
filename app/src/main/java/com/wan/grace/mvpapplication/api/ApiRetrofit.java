@@ -37,8 +37,6 @@ public class ApiRetrofit {
 
     ApiRetrofit() {
         //cache url
-        AppContext.getInstance().getCacheDir();
-
         File httpCacheDirectory = new File(AppContext.getInstance().getCacheDir(), "responses");
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
