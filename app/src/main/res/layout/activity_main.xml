@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.wan.grace.mvpapplication.ui.main.MainActivity">
 
-    <include layout="@layout/toolsbar" />
+    <include layout="@layout/wtoolsbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"

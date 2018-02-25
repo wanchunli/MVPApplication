@@ -46,7 +46,6 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         setContentView(provideContentViewId());//布局
         ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        reSetToolbarHeight(mToolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置
             if (canBack()) {

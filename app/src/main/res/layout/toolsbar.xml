@@ -35,7 +35,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:background="@android:color/transparent">
 
             <TextView
                 android:id="@+id/tools_title"

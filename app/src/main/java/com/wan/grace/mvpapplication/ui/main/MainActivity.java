@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,7 +14,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.github.mmin18.widget.RealtimeBlurView;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
@@ -26,7 +24,6 @@ import com.wan.grace.mvpapplication.ui.fragment.platform.PlatformFragment;
 import com.wan.grace.mvpapplication.ui.fragment.tools.ToolsFragment;
 import com.wan.grace.mvpapplication.ui.fragment.user.UserFragment;
 import com.wan.grace.mvpapplication.utils.AnimUtil;
-import com.wan.grace.mvpapplication.utils.StatusBarUtil;
 import com.wan.grace.mvpapplication.widget.CustomViewPager;
 
 import butterknife.BindView;
@@ -59,8 +56,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     RelativeLayout personLayout;
     @BindView(R.id.main_menu)
     LinearLayout mainMenu;
-    @BindView(R.id.blurview)
-    RealtimeBlurView blurview;
+//    @BindView(R.id.blurview)
+//    RealtimeBlurView blurview;
 
     private PopupWindow mPopupWindow;
     private AnimUtil animUtil;
@@ -85,8 +82,8 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         super.onCreate(savedInstanceState);
         initView();
         //状态栏透明和间距处理
-        StatusBarUtil.immersive(this);
-        StatusBarUtil.setPaddingSmart(this, blurview);
+//        StatusBarUtil.immersive(this);
+//        StatusBarUtil.setPaddingSmart(this, blurview);
 //        StatusBarUtil.setPaddingSmart(this, mToolbar);
     }
 
