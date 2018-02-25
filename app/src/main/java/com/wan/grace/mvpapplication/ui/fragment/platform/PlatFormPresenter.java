@@ -1,20 +1,16 @@
 package com.wan.grace.mvpapplication.ui.fragment.platform;
 
 import android.content.Context;
-import android.widget.Toast;
 
-import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.api.ApiFactory;
 import com.wan.grace.mvpapplication.api.MainApi;
 import com.wan.grace.mvpapplication.base.BasePresenter;
-import com.wan.grace.mvpapplication.bean.Movie;
 import com.wan.grace.mvpapplication.bean.MovieSubject;
-import com.wan.grace.mvpapplication.ui.fragment.message.MessageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -49,5 +45,18 @@ public class PlatFormPresenter extends BasePresenter<PlatFormView> {
     private void loadError(Throwable throwable) {
         throwable.printStackTrace();
 //        Toast.makeText(context, R.string.app_name, Toast.LENGTH_SHORT).show();
+    }
+
+    public List<String> getFunList(){
+        List<String> list = new ArrayList<>();
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        list.add("地图查看");
+        return list;
     }
 }

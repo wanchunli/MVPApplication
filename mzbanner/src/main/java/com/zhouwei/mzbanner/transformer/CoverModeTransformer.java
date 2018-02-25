@@ -46,7 +46,7 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
             } else if (currentPos <= 0.0f) {
                 view.setTranslationX(translationX);
             } else if (currentPos >= 0.5) {//两个view中间的临界，这时两个view在同一层
-                view.setTranslationX(translationX - mCoverWidth * Math.abs(Math.abs(currentPos) - 0.5f) / 0.5f);
+                view.setTranslationX(translationX - mCoverWidth * Math.abs(Math.abs(currentPos) - 0.5f) / 1.0f);
             } else {
                 view.setTranslationX(translationX);
             }

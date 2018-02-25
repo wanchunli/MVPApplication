@@ -1,1 +1,1 @@
-include ':app', ':mzbanner', ':MPChartLib', ':rxcache'
+include ':app', ':mzbanner', ':MPChartLib'

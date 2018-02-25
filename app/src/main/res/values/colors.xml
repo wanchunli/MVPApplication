@@ -151,6 +151,7 @@
     <color name="darkblue">#00008b</color> <!-- 暗蓝色 -->
     <color name="navy">#000080</color> <!-- 海军色 -->
     <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="touchlightgrey">#DBDBDB</color> <!-- 淡灰色 -->
 
     <color name="gray1">#fafafa</color> <!-- 自定义灰色 -->
     <color name="gray2">#f8f8f8</color> <!-- 自定义灰色 -->
@@ -168,4 +169,7 @@
     <color name="lightGray">#323232</color>
     <color name="deepGray">#8B8B8B</color>
     <color name="ocbg">#237EAD</color>
+
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
 </resources>

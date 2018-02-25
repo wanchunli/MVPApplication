@@ -11,6 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 19//渲染的目标Api   一定要加
+        renderscriptSupportModeEnabled true// Enable RS support　//开启渲染模式支持  一定要加
     }
     buildTypes {
         release {
@@ -23,7 +26,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 repositories {
@@ -61,4 +63,5 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-2'
     compile 'com.github.mmin18:realtimeblurview:1.0.6'
 //    implementation project(':rxcache')
+//    compile 'com.zchu:rxcache:2.2.0'
 }

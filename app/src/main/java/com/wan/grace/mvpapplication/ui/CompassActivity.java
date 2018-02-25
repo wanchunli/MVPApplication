@@ -5,6 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.base.BasePresenter;
@@ -37,7 +38,6 @@ public class CompassActivity extends MVPBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -59,6 +59,8 @@ public class CompassActivity extends MVPBaseActivity {
         };
         mSensorManager.registerListener(mSensorEventListener,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_GAME);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        initToolBar(toolbar, "", true, true);
     }
 
     @Override

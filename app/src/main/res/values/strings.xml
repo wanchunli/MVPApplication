@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MVPApplication</string>
     <string name="platform">工作台</string>
+    <string name="message">消息</string>
+    <string name="tools">工具箱</string>
+    <string name="me">我</string>
 </resources>

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MVPApplication.iml" filepath="$PROJECT_DIR$/.idea/MVPApplication.iml" />
-      <module fileurl="file://D:\ANSO\MVPApplication\MVPApplication.iml" filepath="D:\ANSO\MVPApplication\MVPApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MPChartLib/MPChartLib.iml" filepath="$PROJECT_DIR$/MPChartLib/MPChartLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MVPApplication.iml" filepath="$PROJECT_DIR$/.idea/MVPApplication.iml" />
       <module fileurl="file://D:\githubItem\MVPApplication\MVPApplication.iml" filepath="D:\githubItem\MVPApplication\MVPApplication.iml" />
+      <module fileurl="file://D:\ANSO\MVPApplication\MVPApplication.iml" filepath="D:\ANSO\MVPApplication\MVPApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mzbanner/mzbanner.iml" filepath="$PROJECT_DIR$/mzbanner/mzbanner.iml" />
     </modules>

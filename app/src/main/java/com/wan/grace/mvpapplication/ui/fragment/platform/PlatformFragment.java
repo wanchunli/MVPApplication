@@ -2,13 +2,19 @@ package com.wan.grace.mvpapplication.ui.fragment.platform;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
+import com.wan.grace.mvpapplication.adapter.BaseAdapter;
+import com.wan.grace.mvpapplication.adapter.FunctionAdpter;
 import com.wan.grace.mvpapplication.base.MVPBaseFragment;
 import com.wan.grace.mvpapplication.bean.Movie;
 import com.wan.grace.mvpapplication.bean.MovieSubject;
@@ -16,6 +22,7 @@ import com.wan.grace.mvpapplication.ui.fragment.banner.BannerViewHolder;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +41,12 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     Unbinder unbinder;
     @BindView(R.id.banner)
     MZBannerView mMZBanner;
+    @BindView(R.id.map_check)
+    LinearLayout mapCheckLayout;
+    @BindView(R.id.function_recyclerview)
+    RecyclerView funRecyclerview;
+    FunctionAdpter functionAdpter;
+    List<String> funList = new ArrayList<>();
 
     @Override
     protected PlatFormPresenter createPresenter() {
@@ -100,6 +113,24 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
 //            }
 //        });
         mPresenter.getMovieBanner();
+        funList = mPresenter.getFunList();
+        functionAdpter = new FunctionAdpter(getActivity(),funList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
+        funRecyclerview.setLayoutManager(gridLayoutManager);
+        funRecyclerview.setAdapter(functionAdpter);
+        functionAdpter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+            }
+        });
+        mapCheckLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
