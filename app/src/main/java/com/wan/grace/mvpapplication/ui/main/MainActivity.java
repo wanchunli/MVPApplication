@@ -18,12 +18,14 @@ import android.widget.TextView;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
+import com.wan.grace.mvpapplication.ui.CompassActivity;
 import com.wan.grace.mvpapplication.ui.ContactsActivity;
 import com.wan.grace.mvpapplication.ui.fragment.message.MessageFragment;
 import com.wan.grace.mvpapplication.ui.fragment.platform.PlatformFragment;
 import com.wan.grace.mvpapplication.ui.fragment.tools.ToolsFragment;
 import com.wan.grace.mvpapplication.ui.fragment.user.UserFragment;
 import com.wan.grace.mvpapplication.utils.AnimUtil;
+import com.wan.grace.mvpapplication.utils.StatusBarUtil;
 import com.wan.grace.mvpapplication.widget.CustomViewPager;
 
 import butterknife.BindView;
@@ -78,6 +80,10 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //状态栏透明和间距处理
+        StatusBarUtil.immersive(this);
+        StatusBarUtil.setPaddingSmart(this, mToolbar);
+//        StatusBarUtil.setPaddingSmart(this, findViewById(R.id.blurview));
         initView();
     }
 
@@ -222,6 +228,15 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
             @Override
             public void onDismiss() {
                 toggleBright();
+            }
+        });
+        TextView compassTextview = mPopupWindow.getContentView().findViewById(R.id.tv_1);
+        compassTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(it);
+                mPopupWindow.dismiss();
             }
         });
     }

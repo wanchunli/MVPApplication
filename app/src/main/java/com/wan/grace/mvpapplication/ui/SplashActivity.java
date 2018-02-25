@@ -1,7 +1,6 @@
 package com.wan.grace.mvpapplication.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.wan.grace.mvpapplication.R;

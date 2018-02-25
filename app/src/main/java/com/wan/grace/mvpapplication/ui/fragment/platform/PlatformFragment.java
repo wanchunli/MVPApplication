@@ -16,7 +16,6 @@ import com.wan.grace.mvpapplication.ui.fragment.banner.BannerViewHolder;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
