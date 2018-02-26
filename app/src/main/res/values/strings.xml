@@ -4,4 +4,8 @@
     <string name="message">消息</string>
     <string name="tools">工具箱</string>
     <string name="me">我</string>
+
+    <string name="wifi_connected">无线网络已连接</string>
+    <string name="mobile_connected">移动数据网络已连接</string>
+    <string name="no_net_connected">当前网络断开连接</string>
 </resources>

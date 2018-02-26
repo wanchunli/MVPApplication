@@ -1,7 +1,11 @@
 package com.wan.grace.mvpapplication.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkRequest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.constants.Constants;
+import com.wan.grace.mvpapplication.utils.NetUtil;
 
 import java.lang.reflect.Field;
 
@@ -34,6 +39,10 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     protected T mPresenter;
     protected Toolbar mToolbar;
     private String TAG = "MVPBaseActivity";
+    /**
+     * 网络类型
+     */
+    private int netMobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }
+        netListener();
         setContentView(provideContentViewId());//布局
+        init();
         ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
@@ -55,6 +66,32 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             }
         }
         initViews();
+    }
+
+    public void init() {
+
+    }
+
+    int flag = 0;
+    public void netListener() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(new NetworkRequest.Builder().build(),
+                new ConnectivityManager.NetworkCallback() {
+                    @Override public void onAvailable(Network network) {
+                        super.onAvailable(network);
+                        if (flag != 0) {
+                            netMobile = NetUtil.getNetWorkState(MVPBaseActivity.this);
+                            if (netMobile == 1) {
+                                showTips(getString(R.string.wifi_connected));
+                            } else if (netMobile == 0) {
+                                showTips(getString(R.string.mobile_connected));
+                            } else if (netMobile == -1) {
+                                showTips(getString(R.string.no_net_connected));
+                            }
+                        }
+                        flag = 1;
+                    }
+                });
     }
 
     public void initViews() {
@@ -231,4 +268,5 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     public void doReadContactPermission() {
 
     }
+
 }

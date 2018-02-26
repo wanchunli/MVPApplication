@@ -29,6 +29,11 @@ public class SplashActivity extends MVPBaseActivity {
     }
 
     @Override
+    public void init() {
+        super.init();
+    }
+
+    @Override
     public void initViews() {
         super.initViews();
     }

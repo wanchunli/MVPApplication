@@ -56,8 +56,6 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     RelativeLayout personLayout;
     @BindView(R.id.main_menu)
     LinearLayout mainMenu;
-//    @BindView(R.id.blurview)
-//    RealtimeBlurView blurview;
 
     private PopupWindow mPopupWindow;
     private AnimUtil animUtil;

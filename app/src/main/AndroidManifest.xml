@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 添加手机连接网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -17,13 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.main.MainActivity"
-            >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:name=".ui.main.MainActivity">
         </activity>
         <activity android:name=".ui.ContactsActivity" />
         <activity android:name=".ui.SplashActivity"
