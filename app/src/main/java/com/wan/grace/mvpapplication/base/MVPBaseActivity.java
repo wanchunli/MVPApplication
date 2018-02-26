@@ -66,9 +66,14 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             }
         }
         initViews();
+        initListener();
     }
 
     public void init() {
+
+    }
+
+    public void initListener(){
 
     }
 
@@ -243,6 +248,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 } else {
                 }
                 break;
+            case Constants.OPEN_CAMERA_CODE:
+                doOpenCameraPermission();
+                break;
         }
 
     }
@@ -266,6 +274,13 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
      * 默认读联系人的权限
      */
     public void doReadContactPermission() {
+
+    }
+
+    /**
+     * 默认打开照相机执行的方法
+     */
+    public void doOpenCameraPermission() {
 
     }
 

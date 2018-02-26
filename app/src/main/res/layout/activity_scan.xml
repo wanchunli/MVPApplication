@@ -9,7 +9,7 @@
         android:id="@+id/zxingview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:qrcv_animTime="1000"
+        app:qrcv_animTime="3000"
         app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
         app:qrcv_barcodeRectHeight="140dp"
         app:qrcv_borderColor="@android:color/white"
@@ -40,5 +40,24 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/my_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@color/green1"
+            android:text="我的二维码"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

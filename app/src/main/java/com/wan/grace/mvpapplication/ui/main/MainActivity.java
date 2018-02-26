@@ -1,5 +1,6 @@
 package com.wan.grace.mvpapplication.ui.main;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
+import com.wan.grace.mvpapplication.constants.Constants;
 import com.wan.grace.mvpapplication.ui.CompassActivity;
 import com.wan.grace.mvpapplication.ui.ContactsActivity;
 import com.wan.grace.mvpapplication.ui.ScanActivity;
@@ -268,8 +270,13 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, ScanActivity.class);
-                startActivity(it);
+
+                if (hasPermissions(Manifest.permission.CAMERA)) {
+                    Intent it = new Intent(MainActivity.this, ScanActivity.class);
+                    startActivity(it);
+                } else {
+                    requestPermissions(Constants.OPEN_CAMERA_CODE, Manifest.permission.CAMERA);
+                }
                 mPopupWindow.dismiss();
             }
         });
@@ -325,5 +332,11 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         // everything behind this window will be dimmed.
         // 此方法用来设置浮动层，防止部分手机变暗无效
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    @Override
+    public void doOpenCameraPermission() {
+        Intent it = new Intent(MainActivity.this, ScanActivity.class);
+        startActivity(it);
     }
 }
