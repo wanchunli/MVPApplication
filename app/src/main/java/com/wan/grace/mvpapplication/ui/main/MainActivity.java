@@ -19,6 +19,7 @@ import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.ui.CompassActivity;
 import com.wan.grace.mvpapplication.ui.ContactsActivity;
+import com.wan.grace.mvpapplication.ui.ScanActivity;
 import com.wan.grace.mvpapplication.ui.fragment.message.MessageFragment;
 import com.wan.grace.mvpapplication.ui.fragment.platform.PlatformFragment;
 import com.wan.grace.mvpapplication.ui.fragment.tools.ToolsFragment;
@@ -267,7 +268,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, CompassActivity.class);
+                Intent it = new Intent(MainActivity.this, ScanActivity.class);
                 startActivity(it);
                 mPopupWindow.dismiss();
             }

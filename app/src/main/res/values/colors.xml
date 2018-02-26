@@ -172,4 +172,10 @@
 
     <color name="primary_dark">#1976D2</color>
     <color name="primary_light">#BBDEFB</color>
+
+    //二维码
+    <color name="green0">#45C01A</color>
+    <color name="green1">#45C01A</color>
+    <color name="green2">#A3DEA3</color>
+    <color name="green3">#1AAD19</color>
 </resources>

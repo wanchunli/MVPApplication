@@ -5,11 +5,17 @@
     <!-- 添加读取联系人权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 添加手机连接网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 添加手机震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 添加相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
         android:name=".AppContext"
@@ -19,21 +25,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.main.MainActivity">
-        </activity>
+        <activity android:name=".ui.main.MainActivity"></activity>
         <activity android:name=".ui.ContactsActivity" />
-        <activity android:name=".ui.SplashActivity"
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CompassActivity"
-            android:theme="@style/AppTheme.FullScreen"
-            ></activity>
-
+        <activity
+            android:name=".ui.CompassActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity android:name=".ui.ScanActivity"></activity>
     </application>
 
 </manifest>
