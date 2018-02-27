@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wan.grace.mvpapplication.ui.main.MainActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrow_back_white_24dp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tools_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/check_gis_map"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/more_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/menu_more" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.wan.grace.mvpapplication.widget.CustomViewPager
+            android:id="@+id/main_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/view">
+
+        </com.wan.grace.mvpapplication.widget.CustomViewPager>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/main_menu"
+            android:background="@color/dimgray" />
+
+        <LinearLayout
+            android:id="@+id/main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/platform_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/touch_bg"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/home_select" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/message_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/touch_bg"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/message_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/manager_select" />
+
+                <TextView
+                    android:id="@+id/message_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/message_image"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/update_point_bg"
+                    android:gravity="center"
+                    android:text="99"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tools_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/touch_bg"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/tools_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/message_select" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/person_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/touch_bg"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/person_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/person_select" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/person_image"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/update_point_bg"
+                    android:gravity="center"
+                    android:text="99"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

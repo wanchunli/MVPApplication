@@ -13,9 +13,10 @@
     <!-- 添加手机震动权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 添加相机权限 -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".AppContext"
@@ -25,7 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MainActivity"></activity>
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.ContactsActivity" />
         <activity
             android:name=".ui.SplashActivity"
@@ -39,7 +40,8 @@
         <activity
             android:name=".ui.CompassActivity"
             android:theme="@style/AppTheme.FullScreen" />
-        <activity android:name=".ui.ScanActivity"></activity>
+        <activity android:name=".ui.ScanActivity" />
+        <activity android:name=".ui.GISMapActivity"></activity>
     </application>
 
 </manifest>

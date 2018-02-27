@@ -96,23 +96,23 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
 
             }
         });
-//        List<Integer> list = new ArrayList<>();
-//        for (int i = 0; i < RES.length; i++) {
-//            list.add(RES[i]);
-//        }
-//
-//        List<Integer> bannerList = new ArrayList<>();
-//        for (int i = 0; i < BANNER.length; i++) {
-//            bannerList.add(BANNER[i]);
-//        }
-//        mMZBanner.setIndicatorVisible(true);
-//        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
-//            @Override
-//            public BannerViewHolder createViewHolder() {
-//                return new BannerViewHolder();
-//            }
-//        });
-        mPresenter.getMovieBanner();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < RES.length; i++) {
+            list.add(RES[i]);
+        }
+
+        List<Integer> bannerList = new ArrayList<>();
+        for (int i = 0; i < BANNER.length; i++) {
+            bannerList.add(BANNER[i]);
+        }
+        mMZBanner.setIndicatorVisible(true);
+        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
+            @Override
+            public BannerViewHolder createViewHolder() {
+                return new BannerViewHolder();
+            }
+        });
+//        mPresenter.getMovieBanner();
         funList = mPresenter.getFunList();
         functionAdpter = new FunctionAdpter(getActivity(),funList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);

@@ -11,4 +11,6 @@
 
     <string name="qrcode_scan">扫一扫</string>
     <string name="open_camera_failed">打开相机失败</string>
+    <string name="check_gis_map">查看地图</string>
+
 </resources>
