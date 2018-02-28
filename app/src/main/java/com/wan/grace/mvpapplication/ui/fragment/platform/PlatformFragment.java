@@ -18,6 +18,7 @@ import com.wan.grace.mvpapplication.adapter.FunctionAdpter;
 import com.wan.grace.mvpapplication.base.MVPBaseFragment;
 import com.wan.grace.mvpapplication.bean.Movie;
 import com.wan.grace.mvpapplication.bean.MovieSubject;
+import com.wan.grace.mvpapplication.cache.AppShared;
 import com.wan.grace.mvpapplication.ui.fragment.banner.BannerViewHolder;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -35,10 +36,10 @@ import butterknife.Unbinder;
 
 public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPresenter> implements PlatFormView {
 
-    public static final String TAG = "MZModeBannerFragment";
+    public static final String TAG = "PlatformFragment";
     public static final int[] RES = new int[]{R.mipmap.image5, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image6, R.mipmap.image7, R.mipmap.image8};
     public static final int[] BANNER = new int[]{R.mipmap.banner1, R.mipmap.banner2, R.mipmap.banner3, R.mipmap.banner4, R.mipmap.banner5};
-    Unbinder unbinder;
+//    Unbinder unbinder;
     @BindView(R.id.banner)
     MZBannerView mMZBanner;
     @BindView(R.id.map_check)
@@ -67,7 +68,7 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
+//        unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -96,23 +97,23 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
 
             }
         });
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < RES.length; i++) {
-            list.add(RES[i]);
-        }
-
-        List<Integer> bannerList = new ArrayList<>();
-        for (int i = 0; i < BANNER.length; i++) {
-            bannerList.add(BANNER[i]);
-        }
-        mMZBanner.setIndicatorVisible(true);
-        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
-            @Override
-            public BannerViewHolder createViewHolder() {
-                return new BannerViewHolder();
-            }
-        });
-//        mPresenter.getMovieBanner();
+//        List<Integer> list = new ArrayList<>();
+//        for (int i = 0; i < RES.length; i++) {
+//            list.add(RES[i]);
+//        }
+//
+//        List<Integer> bannerList = new ArrayList<>();
+//        for (int i = 0; i < BANNER.length; i++) {
+//            bannerList.add(BANNER[i]);
+//        }
+//        mMZBanner.setIndicatorVisible(true);
+//        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
+//            @Override
+//            public BannerViewHolder createViewHolder() {
+//                return new BannerViewHolder();
+//            }
+//        });
+        mPresenter.getMovieBanner();
         funList = mPresenter.getFunList();
         functionAdpter = new FunctionAdpter(getActivity(),funList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
@@ -135,7 +136,7 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
 
     @Override
     public void setDate(String dateStr, MovieSubject movieSubject) {
-        setBanner(movieSubject.subjects);
+        setBanner(movieSubject.getSubjects());
     }
 
     @Override
@@ -146,7 +147,7 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+//        unbinder.unbind();
     }
 
     @Override

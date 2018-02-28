@@ -14,7 +14,7 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 /**
  * Created by 开发部 on 2018/2/7.
  */
-public class BannerViewHolder implements MZViewHolder<Integer> {
+public class BannerViewHolder implements MZViewHolder<Movie> {
     private ImageView mImageView;
     @Override
     public View createView(Context context) {
@@ -24,16 +24,16 @@ public class BannerViewHolder implements MZViewHolder<Integer> {
         return view;
     }
 
-//    @Override
-//    public void onBind(Context context, int position, Movie movie) {
-//        // 数据绑定
-//        Glide.with(context).load(movie.images.large)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL).into(mImageView);
-//    }
-
     @Override
-    public void onBind(Context context, int position, Integer data) {
+    public void onBind(Context context, int position, Movie movie) {
         // 数据绑定
-        mImageView.setImageResource(data);
+        Glide.with(context).load(movie.getImages().getLarge())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(mImageView);
     }
+
+//    @Override
+//    public void onBind(Context context, int position, Integer data) {
+//        // 数据绑定
+//        mImageView.setImageResource(data);
+//    }
 }

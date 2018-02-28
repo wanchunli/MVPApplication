@@ -8,8 +8,12 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.wan.grace.mvpapplication.bean.Movie;
+import com.wan.grace.mvpapplication.bean.MovieSubject;
 import com.wan.grace.mvpapplication.bean.User;
 import com.wan.grace.mvpapplication.cache.AppShared;
+
+import java.util.List;
 
 /**
  * Created by 开发部 on 2018/2/8.
@@ -24,6 +28,7 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        mAppShared = new AppShared(this);
     }
 
     public static AppContext getInstance() {
@@ -76,6 +81,20 @@ public class AppContext extends Application {
             mAppShared = new AppShared(this);
         }
         mAppShared.clearUserArray();
+    }
+
+    public MovieSubject getBannerData() {
+        if (mAppShared == null) {
+            mAppShared = new AppShared(this);
+        }
+        return mAppShared.getBannerData();
+    }
+
+    public void saveBannerData(MovieSubject movieSubject) {
+        if (mAppShared == null) {
+            mAppShared = new AppShared(this);
+        }
+        mAppShared.saveBannerData(movieSubject);
     }
 
     /**

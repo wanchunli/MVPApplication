@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wan.grace.mvpapplication.AppContext;
+
 import butterknife.ButterKnife;
 
 /**
@@ -17,6 +19,7 @@ import butterknife.ButterKnife;
  */
 public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fragment {
 
+    public AppContext ac;
     protected T mPresenter;
 
     private boolean mIsRequestDataRefresh = false;
@@ -25,6 +28,7 @@ public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fra
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ac = (AppContext) getActivity().getApplicationContext();
         mPresenter = createPresenter();
         mPresenter.attachView((V) this);
     }

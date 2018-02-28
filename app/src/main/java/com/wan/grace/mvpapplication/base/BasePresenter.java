@@ -1,5 +1,7 @@
 package com.wan.grace.mvpapplication.base;
 
+import com.wan.grace.mvpapplication.AppContext;
+
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
@@ -12,6 +14,8 @@ import java.lang.ref.WeakReference;
 public abstract class BasePresenter<V> {
 
     protected Reference<V> mViewRef;
+
+    public AppContext ac;
 
 //    public static final MainApi mainApi = ApiFactory.getMainApiSingleton();
 //

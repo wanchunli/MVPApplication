@@ -17,6 +17,7 @@ import rx.Observable;
  * get Zhihu with retrofit
  */
 public interface MainApi {
+
     //获取豆瓣Top250 榜单
     @GET("top250")
     Observable<MovieSubject> getTop250(@Query("start") int start, @Query("count") int count);
