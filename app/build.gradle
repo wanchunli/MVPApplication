@@ -60,10 +60,15 @@ dependencies {
     implementation project(':mzbanner')
     implementation 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
     implementation project(':MPChartLib')
+    //刷新效果
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-2'
+    //毛玻璃效果
     compile 'com.github.mmin18:realtimeblurview:1.0.6'
 
+    //二维码扫描
     compile 'com.google.zxing:core:3.3.0'
     compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
     compile 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+    //图库选择
+    compile 'com.lqr.imagepicker:library:1.0.0'
 }
