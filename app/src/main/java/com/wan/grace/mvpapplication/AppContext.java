@@ -7,18 +7,23 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.net.Uri;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lqr.imagepicker.ImagePicker;
 import com.lqr.imagepicker.loader.ImageLoader;
 import com.lqr.imagepicker.view.CropImageView;
+import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.bean.Movie;
 import com.wan.grace.mvpapplication.bean.MovieSubject;
 import com.wan.grace.mvpapplication.bean.User;
 import com.wan.grace.mvpapplication.cache.AppShared;
+import com.wan.grace.mvpapplication.utils.NetUtil;
 
 import java.util.List;
 
@@ -30,6 +35,10 @@ public class AppContext extends Application {
 
     private static AppContext sInstance;
     private AppShared mAppShared;
+    /**
+     * 网络类型
+     */
+    private int netMobile;
 
     @Override
     public void onCreate() {
@@ -37,6 +46,7 @@ public class AppContext extends Application {
         sInstance = this;
         mAppShared = new AppShared(this);
         initImagePicker();
+//        netListener();
     }
 
     public static AppContext getInstance() {
@@ -143,6 +153,31 @@ public class AppContext extends Application {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null && ni.isConnectedOrConnecting();
+    }
+
+    int flag = 0;
+    public void netListener() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(new NetworkRequest.Builder().build(),
+                new ConnectivityManager.NetworkCallback() {
+                    @Override public void onAvailable(Network network) {
+                        super.onAvailable(network);
+                        if (flag != 0) {
+                            netMobile = NetUtil.getNetWorkState(getApplicationContext());
+                            if (netMobile == 1) {
+                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+//                                showTips(getString(R.string.wifi_connected));
+                            } else if (netMobile == 0) {
+                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+//                                showTips(getString(R.string.mobile_connected));
+                            } else if (netMobile == -1) {
+                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+//                                showTips(getString(R.string.no_net_connected));
+                            }
+                        }
+                        flag = 1;
+                    }
+                });
     }
 
     /**

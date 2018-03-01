@@ -51,12 +51,12 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv_5"
+            android:id="@+id/download_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:background="?android:attr/selectableItemBackground"
-            android:text="帮助与反馈"
+            android:text="下载App"
             android:textColor="@color/white"
             android:textSize="14sp"/>
     </LinearLayout>

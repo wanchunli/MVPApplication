@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,11 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.adapter.CustomViewPagerAdapter;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.constants.Constants;
+import com.wan.grace.mvpapplication.service.UpdateAppService;
 import com.wan.grace.mvpapplication.ui.CompassActivity;
 import com.wan.grace.mvpapplication.ui.ContactsActivity;
 import com.wan.grace.mvpapplication.ui.ScanActivity;
@@ -67,6 +70,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
     private static final long DURATION = 200;
     private static final float START_ALPHA = 0.7f;
     private static final float END_ALPHA = 1f;
+    private long time = 0;
 
     @Override
     protected int provideContentViewId() {
@@ -184,6 +188,7 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
     }
 
     /*
@@ -289,12 +294,12 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
                 mPopupWindow.dismiss();
             }
         });
-        TextView tv5 = mPopupWindow.getContentView().findViewById(R.id.tv_5);
-        tv5.setOnClickListener(new View.OnClickListener() {
+        TextView downloadTv = mPopupWindow.getContentView().findViewById(R.id.download_tv);
+        downloadTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, CompassActivity.class);
-                startActivity(it);
+                Intent it = new Intent(MainActivity.this, UpdateAppService.class);
+                startService(it);
                 mPopupWindow.dismiss();
             }
         });
@@ -339,4 +344,22 @@ public class MainActivity extends MVPBaseActivity<MainView, MainPresenter> imple
         Intent it = new Intent(MainActivity.this, ScanActivity.class);
         startActivity(it);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - time > 1000)) {
+                Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
+                time = System.currentTimeMillis();
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+            }
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
 }

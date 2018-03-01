@@ -8,6 +8,8 @@ import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -31,4 +33,5 @@ public interface MainApi {
     Call<ResponseBody> getCall(@Path("id") int id);
     // {id} 表示是一个变量
     // method 的值 retrofit 不会做处理，所以要自行保证准确
+
 }
