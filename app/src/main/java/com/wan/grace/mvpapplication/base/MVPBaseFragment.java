@@ -12,10 +12,11 @@ import com.wan.grace.mvpapplication.AppContext;
 import butterknife.ButterKnife;
 
 /**
- * Created by Werb on 2016/7/27.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * Base of Fragment
+ *基础的Fragment
+ *MVPBaseFragment
+ *author wanchun
+ *email 1596900283@qq.com
+ *create 2018/3/5 14:18
  */
 public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fragment {
 

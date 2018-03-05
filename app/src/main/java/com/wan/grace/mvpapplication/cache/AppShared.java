@@ -18,7 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 共享存储类
+ *共享存储类
+ *AppShared
+ *author wanchun
+ *email 1596900283@qq.com
+ *create 2018/3/5 14:22
  */
 public class AppShared {
 

@@ -17,10 +17,11 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * retrofit instance
+ * retrofit核心
+ * ApiRetrofit
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:30
  */
 public class ApiRetrofit {
 

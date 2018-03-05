@@ -10,7 +10,11 @@ import com.wan.grace.mvpapplication.utils.CommonViewHolder;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/11/18.
+ * 首页功能模块适配器
+ * FunctionAdpter
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:29
  */
 public class FunctionAdpter extends BaseAdapter<String> {
 

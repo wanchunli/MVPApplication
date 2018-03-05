@@ -20,12 +20,14 @@ import android.view.View;
 
 import com.wan.grace.mvpapplication.R;
 
-
 /**
- * Created by yc.Zhao on 2017/12/27 0027.
+ * 自定义指南针View
+ * ChaosCompassView
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:34
  */
-
-public class ChaosCompassView extends View{
+public class ChaosCompassView extends View {
     private Canvas mCanvas;
     private Context mContext;
     //View矩形的宽度
@@ -61,7 +63,7 @@ public class ChaosCompassView extends View{
     //NESW 文字笔 和文字外接矩形
     private Paint mNorthPaint;
     private Paint mOthersPaint;
-    private Rect  mPositionRect;
+    private Rect mPositionRect;
     //小刻度文字大小矩形和画笔
     private Paint mSamllDegreePaint;
     //两位数的
@@ -98,13 +100,13 @@ public class ChaosCompassView extends View{
     //设置camera
     private Camera mCamera;
 
-    private float val=0f;
+    private float val = 0f;
     private float valCompare;
     //偏转角度红线笔
     private Paint mAnglePaint;
 
     //方位文字
-    private String text="北";
+    private String text = "北";
 
     public float getVal() {
         return val;
@@ -116,11 +118,11 @@ public class ChaosCompassView extends View{
     }
 
     public ChaosCompassView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ChaosCompassView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public ChaosCompassView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -209,7 +211,6 @@ public class ChaosCompassView extends View{
     }
 
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -231,7 +232,6 @@ public class ChaosCompassView extends View{
     }
 
 
-
     /**
      * 设置camera相关
      */
@@ -244,88 +244,88 @@ public class ChaosCompassView extends View{
         mCamera.restore();
         //camera默认旋转是View左上角为旋转中心
         //所以动作之前要，设置矩阵位置 -mTextHeight-mOutSideRadius
-        mCameraMatrix.preTranslate(-getWidth()/2,-getHeight()/2);
+        mCameraMatrix.preTranslate(-getWidth() / 2, -getHeight() / 2);
         //动作之后恢复位置
-        mCameraMatrix.postTranslate(getWidth()/2,getHeight()/2);
+        mCameraMatrix.postTranslate(getWidth() / 2, getHeight() / 2);
         mCanvas.concat(mCameraMatrix);
     }
 
     private void drawInnerCricle() {
 
-        mInnerShader = new RadialGradient(width/2,mOutSideRadius+mTextHeight,mCircumRadius-40, Color.parseColor("#323232"),
-                Color.parseColor("#000000"),Shader.TileMode.CLAMP);
+        mInnerShader = new RadialGradient(width / 2, mOutSideRadius + mTextHeight, mCircumRadius - 40, Color.parseColor("#323232"),
+                Color.parseColor("#000000"), Shader.TileMode.CLAMP);
         mInnerPaint.setShader(mInnerShader);
-        mCanvas.drawCircle(width/2,mOutSideRadius+mTextHeight,mCircumRadius-40,mInnerPaint);
+        mCanvas.drawCircle(width / 2, mOutSideRadius + mTextHeight, mCircumRadius - 40, mInnerPaint);
 
     }
 
     private void drawCenterText() {
-        String centerText=String.valueOf((int) val+"°");
-        mCenterPaint.getTextBounds(centerText,0,centerText.length(),mCenterTextRect);
+        String centerText = String.valueOf((int) val + "°");
+        mCenterPaint.getTextBounds(centerText, 0, centerText.length(), mCenterTextRect);
         int centerTextWidth = mCenterTextRect.width();
         int centerTextHeight = mCenterTextRect.height();
-        mCanvas.drawText(centerText,width/2-centerTextWidth/2,mTextHeight+mOutSideRadius+centerTextHeight/5,mCenterPaint);
+        mCanvas.drawText(centerText, width / 2 - centerTextWidth / 2, mTextHeight + mOutSideRadius + centerTextHeight / 5, mCenterPaint);
 
     }
 
     private void drawCompassDegreeScale() {
         mCanvas.save();
         //获取N文字的宽度
-        mNorthPaint.getTextBounds("N",0,1,mPositionRect);
+        mNorthPaint.getTextBounds("N", 0, 1, mPositionRect);
         int mPositionTextWidth = mPositionRect.width();
         int mPositionTextHeight = mPositionRect.height();
         //获取W文字宽度,因为W比较宽 所以要单独获取
-        mNorthPaint.getTextBounds("W",0,1,mPositionRect);
+        mNorthPaint.getTextBounds("W", 0, 1, mPositionRect);
         int mWPositionTextWidth = mPositionRect.width();
         int mWPositionTextHeight = mPositionRect.height();
         //获取小刻度，两位数的宽度
-        mSamllDegreePaint.getTextBounds("30",0,1,mSencondRect);
+        mSamllDegreePaint.getTextBounds("30", 0, 1, mSencondRect);
         int mSencondTextWidth = mSencondRect.width();
         int mSencondTextHeight = mSencondRect.height();
         //获取小刻度，3位数的宽度
-        mSamllDegreePaint.getTextBounds("30",0,1,mThirdRect);
+        mSamllDegreePaint.getTextBounds("30", 0, 1, mThirdRect);
         int mThirdTextWidth = mThirdRect.width();
         int mThirdTextHeight = mThirdRect.height();
 
-        mCanvas.rotate(-val,width/2,mOutSideRadius+mTextHeight);
+        mCanvas.rotate(-val, width / 2, mOutSideRadius + mTextHeight);
 
 
         //画刻度线
         for (int i = 0; i < 240; i++) {
 
-            if (i==0||i==60||i==120||i==180){
-                mCanvas.drawLine(getWidth() / 2, mTextHeight+mOutSideRadius-mCircumRadius+10,
-                        getWidth() / 2,  mTextHeight+mOutSideRadius-mCircumRadius+30, mDeepGrayPaint);
-            }else{
-                mCanvas.drawLine(getWidth() / 2, mTextHeight+mOutSideRadius-mCircumRadius+10,
-                        getWidth() / 2,  mTextHeight+mOutSideRadius-mCircumRadius+30, mLightGrayPaint);
+            if (i == 0 || i == 60 || i == 120 || i == 180) {
+                mCanvas.drawLine(getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 10,
+                        getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 30, mDeepGrayPaint);
+            } else {
+                mCanvas.drawLine(getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 10,
+                        getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 30, mLightGrayPaint);
             }
-            if (i==0){
-                mCanvas.drawText("N", this.width /2-mPositionTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mPositionTextHeight,mNorthPaint);
-            }else if (i==60){
-                mCanvas.drawText("E", this.width /2-mPositionTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mPositionTextHeight,mOthersPaint);
-            }else if (i==120){
-                mCanvas.drawText("S", this.width /2-mPositionTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mPositionTextHeight,mOthersPaint);
-            }else if (i==180){
-                mCanvas.drawText("W", this.width /2-mWPositionTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mWPositionTextHeight,mOthersPaint);
-            }else if (i==20){
-                mCanvas.drawText("30", this.width /2-mSencondTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mSencondTextHeight,mSamllDegreePaint);
-            }else if (i==40){
-                mCanvas.drawText("60", this.width /2-mSencondTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mSencondTextHeight,mSamllDegreePaint);
-            }else if (i==80){
-                mCanvas.drawText("120", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
-            }else if (i==100){
-                mCanvas.drawText("150", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
-            }else if (i==140){
-                mCanvas.drawText("210", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
-            }else if (i==160){
-                mCanvas.drawText("240", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
-            }else if (i==200){
-                mCanvas.drawText("300", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
-            }else if (i==220){
-                mCanvas.drawText("330", this.width /2-mThirdTextWidth/2,mTextHeight+mOutSideRadius-mCircumRadius+40+mThirdTextHeight,mSamllDegreePaint);
+            if (i == 0) {
+                mCanvas.drawText("N", this.width / 2 - mPositionTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mPositionTextHeight, mNorthPaint);
+            } else if (i == 60) {
+                mCanvas.drawText("E", this.width / 2 - mPositionTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mPositionTextHeight, mOthersPaint);
+            } else if (i == 120) {
+                mCanvas.drawText("S", this.width / 2 - mPositionTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mPositionTextHeight, mOthersPaint);
+            } else if (i == 180) {
+                mCanvas.drawText("W", this.width / 2 - mWPositionTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mWPositionTextHeight, mOthersPaint);
+            } else if (i == 20) {
+                mCanvas.drawText("30", this.width / 2 - mSencondTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mSencondTextHeight, mSamllDegreePaint);
+            } else if (i == 40) {
+                mCanvas.drawText("60", this.width / 2 - mSencondTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mSencondTextHeight, mSamllDegreePaint);
+            } else if (i == 80) {
+                mCanvas.drawText("120", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
+            } else if (i == 100) {
+                mCanvas.drawText("150", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
+            } else if (i == 140) {
+                mCanvas.drawText("210", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
+            } else if (i == 160) {
+                mCanvas.drawText("240", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
+            } else if (i == 200) {
+                mCanvas.drawText("300", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
+            } else if (i == 220) {
+                mCanvas.drawText("330", this.width / 2 - mThirdTextWidth / 2, mTextHeight + mOutSideRadius - mCircumRadius + 40 + mThirdTextHeight, mSamllDegreePaint);
             }
-            mCanvas.rotate(1.5f, mCenterX, mOutSideRadius+mTextHeight);
+            mCanvas.rotate(1.5f, mCenterX, mOutSideRadius + mTextHeight);
         }
         mCanvas.restore();
 
@@ -337,27 +337,27 @@ public class ChaosCompassView extends View{
     private void drawCompassCircum() {
         mCanvas.save();
         //外接圆小三角形的高度
-        int mTriangleHeight=(mOutSideRadius-mCircumRadius)/2;
+        int mTriangleHeight = (mOutSideRadius - mCircumRadius) / 2;
 
-        mCanvas.rotate(-val,width/2,mOutSideRadius+mTextHeight);
-        mCircumTriangle.moveTo(width/2,mTriangleHeight+mTextHeight);
+        mCanvas.rotate(-val, width / 2, mOutSideRadius + mTextHeight);
+        mCircumTriangle.moveTo(width / 2, mTriangleHeight + mTextHeight);
         //内接三角形的边长,简单数学运算
-        float mTriangleSide = (float) ((mTriangleHeight/(Math.sqrt(3)))*2);
-        mCircumTriangle.lineTo(width/2-mTriangleSide/2,mTextHeight+mTriangleHeight*2);
-        mCircumTriangle.lineTo(width/2+mTriangleSide/2,mTextHeight+mTriangleHeight*2);
+        float mTriangleSide = (float) ((mTriangleHeight / (Math.sqrt(3))) * 2);
+        mCircumTriangle.lineTo(width / 2 - mTriangleSide / 2, mTextHeight + mTriangleHeight * 2);
+        mCircumTriangle.lineTo(width / 2 + mTriangleSide / 2, mTextHeight + mTriangleHeight * 2);
         mCircumTriangle.close();
-        mCanvas.drawPath(mCircumTriangle,mCircumPaint);
-        mCanvas.drawArc(width/2-mCircumRadius,mTextHeight+mOutSideRadius-mCircumRadius,
-                width/2+mCircumRadius,mTextHeight+mOutSideRadius+mCircumRadius,-85,350,false,mDeepGrayPaint);
+        mCanvas.drawPath(mCircumTriangle, mCircumPaint);
+        mCanvas.drawArc(width / 2 - mCircumRadius, mTextHeight + mOutSideRadius - mCircumRadius,
+                width / 2 + mCircumRadius, mTextHeight + mOutSideRadius + mCircumRadius, -85, 350, false, mDeepGrayPaint);
         mAnglePaint.setStrokeWidth(5f);
-        if (val<=180){
+        if (val <= 180) {
             valCompare = val;
-            mCanvas.drawArc(width/2-mCircumRadius,mTextHeight+mOutSideRadius-mCircumRadius,
-                    width/2+mCircumRadius,mTextHeight+mOutSideRadius+mCircumRadius,-85,valCompare,false,mAnglePaint);
-        }else{
-            valCompare = 360-val;
-            mCanvas.drawArc(width/2-mCircumRadius,mTextHeight+mOutSideRadius-mCircumRadius,
-                    width/2+mCircumRadius,mTextHeight+mOutSideRadius+mCircumRadius,-95,-valCompare,false,mAnglePaint);
+            mCanvas.drawArc(width / 2 - mCircumRadius, mTextHeight + mOutSideRadius - mCircumRadius,
+                    width / 2 + mCircumRadius, mTextHeight + mOutSideRadius + mCircumRadius, -85, valCompare, false, mAnglePaint);
+        } else {
+            valCompare = 360 - val;
+            mCanvas.drawArc(width / 2 - mCircumRadius, mTextHeight + mOutSideRadius - mCircumRadius,
+                    width / 2 + mCircumRadius, mTextHeight + mOutSideRadius + mCircumRadius, -95, -valCompare, false, mAnglePaint);
         }
 
         mCanvas.restore();
@@ -371,53 +371,53 @@ public class ChaosCompassView extends View{
     private void drawCompassOutSide() {
         mCanvas.save();
         //小三角形的高度
-        int mTriangleHeight=40;
+        int mTriangleHeight = 40;
         //定义Path画小三角形
-        mOutsideTriangle.moveTo(width/2,mTextHeight-mTriangleHeight);
+        mOutsideTriangle.moveTo(width / 2, mTextHeight - mTriangleHeight);
         //小三角形的边长
         float mTriangleSide = 46.18f;
         //画出小三角形
-        mOutsideTriangle.lineTo(width/2-mTriangleSide/2,mTextHeight);
-        mOutsideTriangle.lineTo(width/2+mTriangleSide/2,mTextHeight);
+        mOutsideTriangle.lineTo(width / 2 - mTriangleSide / 2, mTextHeight);
+        mOutsideTriangle.lineTo(width / 2 + mTriangleSide / 2, mTextHeight);
         mOutsideTriangle.close();
-        mCanvas.drawPath(mOutsideTriangle,mOutSideCircumPaint);
+        mCanvas.drawPath(mOutsideTriangle, mOutSideCircumPaint);
 
         //画圆弧
         mDarkRedPaint.setStrokeWidth((float) 5);
-        mLightGrayPaint.setStrokeWidth((float)5);
-        mDeepGrayPaint.setStrokeWidth((float)3);
+        mLightGrayPaint.setStrokeWidth((float) 5);
+        mDeepGrayPaint.setStrokeWidth((float) 3);
         mLightGrayPaint.setStyle(Paint.Style.STROKE);
-        mCanvas.drawArc(width/2-mOutSideRadius,mTextHeight,width/2+mOutSideRadius,mTextHeight+mOutSideRadius*2,-80,120,false,mLightGrayPaint);
-        mCanvas.drawArc(width/2-mOutSideRadius,mTextHeight,width/2+mOutSideRadius,mTextHeight+mOutSideRadius*2,40,20,false,mDeepGrayPaint);
-        mCanvas.drawArc(width/2-mOutSideRadius,mTextHeight,width/2+mOutSideRadius,mTextHeight+mOutSideRadius*2,-100,-20,false,mLightGrayPaint);
-        mCanvas.drawArc(width/2-mOutSideRadius,mTextHeight,width/2+mOutSideRadius,mTextHeight+mOutSideRadius*2,-120,-120,false,mDarkRedPaint);
+        mCanvas.drawArc(width / 2 - mOutSideRadius, mTextHeight, width / 2 + mOutSideRadius, mTextHeight + mOutSideRadius * 2, -80, 120, false, mLightGrayPaint);
+        mCanvas.drawArc(width / 2 - mOutSideRadius, mTextHeight, width / 2 + mOutSideRadius, mTextHeight + mOutSideRadius * 2, 40, 20, false, mDeepGrayPaint);
+        mCanvas.drawArc(width / 2 - mOutSideRadius, mTextHeight, width / 2 + mOutSideRadius, mTextHeight + mOutSideRadius * 2, -100, -20, false, mLightGrayPaint);
+        mCanvas.drawArc(width / 2 - mOutSideRadius, mTextHeight, width / 2 + mOutSideRadius, mTextHeight + mOutSideRadius * 2, -120, -120, false, mDarkRedPaint);
         mCanvas.restore();
     }
 
     private void drawText() {
-        if (val<=15||val>=345){
+        if (val <= 15 || val >= 345) {
             text = "北";
-        }else if (val>15&&val<=75){
-            text= "东北";
-        }else if (val>75&&val<=105){
-            text= "东";
-        }else if (val>105&&val<=165){
-            text="东南";
-        }else if (val>165&&val<=195){
+        } else if (val > 15 && val <= 75) {
+            text = "东北";
+        } else if (val > 75 && val <= 105) {
+            text = "东";
+        } else if (val > 105 && val <= 165) {
+            text = "东南";
+        } else if (val > 165 && val <= 195) {
             text = "南";
-        }else if (val>195&&val<=255){
+        } else if (val > 195 && val <= 255) {
             text = "西南";
-        }else if (val>255&&val<=285){
+        } else if (val > 255 && val <= 285) {
             text = "西";
-        }else if (val>285&&val<345){
-            text="西北";
+        } else if (val > 285 && val < 345) {
+            text = "西北";
         }
 
-        mTextPaint.getTextBounds(text,0,text.length(),mTextRect);
+        mTextPaint.getTextBounds(text, 0, text.length(), mTextRect);
         //文字宽度
         int mTextWidth = mTextRect.width();
         //让文字水平居中显示
-        mCanvas.drawText(text,width/2-mTextWidth/2,mTextHeight/2,mTextPaint);
+        mCanvas.drawText(text, width / 2 - mTextWidth / 2, mTextHeight / 2, mTextPaint);
 
     }
 
@@ -436,24 +436,24 @@ public class ChaosCompassView extends View{
             width = widthSize;
         }
         //为指南针上面的文字预留空间，定为1/3边张
-        mTextHeight = width/3;
+        mTextHeight = width / 3;
         //设置圆心点坐标
-        mCenterX = width/2;
-        mCenterY = width/2+mTextHeight;
+        mCenterX = width / 2;
+        mCenterY = width / 2 + mTextHeight;
         //外部圆的外径
-        mOutSideRadius = width*3/8;
+        mOutSideRadius = width * 3 / 8;
         //外接圆的半径
-        mCircumRadius = mOutSideRadius*4/5;
+        mCircumRadius = mOutSideRadius * 4 / 5;
         //camera最大平移距离
-        mMaxCameraTranslate = 0.02f*mOutSideRadius;
-        setMeasuredDimension(width, width+width/3 );
+        mMaxCameraTranslate = 0.02f * mOutSideRadius;
+        setMeasuredDimension(width, width + width / 3);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (mValueAnimator!=null&&mValueAnimator.isRunning()){
+                if (mValueAnimator != null && mValueAnimator.isRunning()) {
                     mValueAnimator.cancel();
                 }
                 //3D 效果让Camera旋转,获取旋转偏移大小
@@ -513,11 +513,12 @@ public class ChaosCompassView extends View{
 
     /**
      * 获取Camera，平移大小
+     *
      * @param event
      */
     private void getCameraTranslate(MotionEvent event) {
         float translateX = (event.getX() - getWidth() / 2);
-        float translateY = (event.getY() - getHeight()/2);
+        float translateY = (event.getY() - getHeight() / 2);
         //求出此时位移的大小与半径之比
         float[] percentArr = getPercent(translateX, translateY);
         //最终位移的大小按比例匀称改变
@@ -527,27 +528,29 @@ public class ChaosCompassView extends View{
 
     /**
      * 让Camera旋转,获取旋转偏移大小
+     *
      * @param event
      */
     private void getCameraRotate(MotionEvent event) {
-        float mRotateX = -(event.getY()-(getHeight())/2);
-        float mRotateY = (event.getX()-getWidth()/2);
+        float mRotateX = -(event.getY() - (getHeight()) / 2);
+        float mRotateY = (event.getX() - getWidth() / 2);
         //求出旋转大小与半径之比
-        float[] percentArr = getPercent(mRotateX,mRotateY);
-        mCameraRotateX = percentArr[0]*mMaxCameraRotate;
-        mCameraRotateY = percentArr[1]*mMaxCameraRotate;
+        float[] percentArr = getPercent(mRotateX, mRotateY);
+        mCameraRotateX = percentArr[0] * mMaxCameraRotate;
+        mCameraRotateY = percentArr[1] * mMaxCameraRotate;
     }
 
     /**
      * 获取比例
+     *
      * @param mCameraRotateX
      * @param mCameraRotateY
      * @return
      */
     private float[] getPercent(float mCameraRotateX, float mCameraRotateY) {
         float[] percentArr = new float[2];
-        float percentX = mCameraRotateX/width;
-        float percentY = mCameraRotateY/width;
+        float percentX = mCameraRotateX / width;
+        float percentY = mCameraRotateY / width;
         //处理一下比例值
         if (percentX > 1) {
             percentX = 1;
@@ -563,7 +566,6 @@ public class ChaosCompassView extends View{
         percentArr[1] = percentY;
         return percentArr;
     }
-
 
 
 }

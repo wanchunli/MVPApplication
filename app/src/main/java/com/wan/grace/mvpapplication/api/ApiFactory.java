@@ -1,10 +1,11 @@
 package com.wan.grace.mvpapplication.api;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * Singleton Factory with retrofit
+ * Api工厂类
+ * ApiFactory
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:30
  */
 public class ApiFactory {
 

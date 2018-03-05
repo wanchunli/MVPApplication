@@ -6,10 +6,11 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * Base of Presenter
+ * 基础Presenter
+ * BasePresenter
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:17
  */
 public abstract class BasePresenter<V> {
 
@@ -21,20 +22,20 @@ public abstract class BasePresenter<V> {
 //
 //    public static final NetPlayApi netPlayApi = ApiFactory.getNetPlayApiSingleton();
 
-    public void attachView(V view){
+    public void attachView(V view) {
         mViewRef = new WeakReference<V>(view);
     }
 
-    protected V getView(){
+    protected V getView() {
         return mViewRef.get();
     }
 
-    public boolean isViewAttached(){
-        return mViewRef != null&&mViewRef.get()!=null;
+    public boolean isViewAttached() {
+        return mViewRef != null && mViewRef.get() != null;
     }
 
-    public void detachView(){
-        if(mViewRef!=null){
+    public void detachView() {
+        if (mViewRef != null) {
             mViewRef.clear();
             mViewRef = null;
         }

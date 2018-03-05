@@ -36,6 +36,7 @@ public class UpdateAppService extends Service implements DownloadStateListener {
     private static final int DOWN_PROGRESS = 2;
     private static final int DOWN_OK = 1;
     private static final int DOWN_ERROR = 0;
+    private static final int UPDATE_PROGRESS = 3;
     private NotificationManager notificationManager;
     private Notification notification;
     private Intent updateIntent;
@@ -113,9 +114,15 @@ public class UpdateAppService extends Service implements DownloadStateListener {
             switch (msg.what) {
                 case DOWN_PROGRESS:
                     int progress = (int) msg.obj;
-                    contentView.setTextViewText(R.id.notificationPercent, progress + "%");
-                    contentView.setProgressBar(R.id.notificationProgress, 100, progress, false);
-                    notificationManager.notify(notification_id, notification);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Message msg = new Message();
+                            msg.what = UPDATE_PROGRESS;
+                            msg.obj = progress;
+                            handler.sendMessage(msg);
+                        }
+                    }).start();
                     break;
                 case DOWN_OK:
                     Notification.Builder builder = new Notification.Builder(UpdateAppService.this);
@@ -126,8 +133,8 @@ public class UpdateAppService extends Service implements DownloadStateListener {
                     builder.setWhen(System.currentTimeMillis());
                     PendingIntent pendingIntent = PendingIntent.getActivity(UpdateAppService.this, 0, updateManager.getIntentInstallApk(), PendingIntent.FLAG_CANCEL_CURRENT);
                     builder.setContentIntent(pendingIntent);
-                    Notification notification = builder.build();
-                    notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification);
+                    Notification notification_ok = builder.build();
+                    notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification_ok);
                     break;
                 case DOWN_ERROR:
                     Notification.Builder builder1 = new Notification.Builder(UpdateAppService.this);
@@ -137,8 +144,14 @@ public class UpdateAppService extends Service implements DownloadStateListener {
                     builder1.setTicker("新消息");
                     builder1.setAutoCancel(true);
                     builder1.setWhen(System.currentTimeMillis());
-                    Notification notification1 = builder1.build();
-                    notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification1);
+                    Notification notification_error = builder1.build();
+                    notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification_error);
+                    break;
+                case UPDATE_PROGRESS:
+                    int updateProgress = (int) msg.obj;
+                    contentView.setTextViewText(R.id.notificationPercent, updateProgress + "%");
+                    contentView.setProgressBar(R.id.notificationProgress, 100, updateProgress, false);
+                    notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification);
                     break;
             }
         }
@@ -148,6 +161,22 @@ public class UpdateAppService extends Service implements DownloadStateListener {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notification = new Notification();
         notification.icon = R.mipmap.ic_launcher;
+//        Notification.Builder builder = new Notification.Builder(UpdateAppService.this);
+//        builder.setContentTitle("App下载");
+//        builder.setContentText("App下载");
+//        builder.setTicker("App开始下载");//设置通知在第一次到达时在状态栏中显示的文本
+//        builder.setVibrate(new long[]{0, 300, 500, 700});//设置使用振动模式
+//        builder.setPriority(Notification.PRIORITY_DEFAULT);//设置通知优先级
+//        builder.setAutoCancel(true);//当用户点击面板就可以让通知自动取消
+//        builder.setSmallIcon(R.mipmap.ic_launcher);//设置通知小Icon
+//        builder.setCategory(Notification.CATEGORY_MESSAGE);//设置通知类别
+//        builder.setColor(0x0000ff);//设置通知栏颜色
+//        PendingIntent pendingIntent = PendingIntent.getActivity(UpdateAppService.this,
+//                0, updateManager.getIntentInstallApk(), PendingIntent.FLAG_CANCEL_CURRENT);
+//        builder.setContentIntent(pendingIntent);
+//        Notification notification = builder.build();
+//        notificationManager.notify(DEFAULT_NOTIFICATION_ID, notification);
+
         contentView = new RemoteViews(getPackageName(), R.layout.notification_item);
         contentView.setTextViewText(R.id.notificationTitle, "loading...");
         contentView.setTextViewText(R.id.notificationPercent, "0%");

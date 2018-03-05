@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.bean.ContactBean;
 import com.wan.grace.mvpapplication.utils.ColorGenerator;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by MQ on 2017/5/8.
+ * 联系人列表适配器
+ * ContactAdapter
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:28
  */
-
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycleHolder> {
 
     private List<ContactBean> contactBeanList;
@@ -29,12 +33,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
     private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
     private TextDrawable.IBuilder mDrawableBuilder = TextDrawable.builder().round();
     private OnItemClickListener onItemClickListener;
+
     public ContactAdapter(Context context) {
         this.mContext = context;
         contactBeanList = new ArrayList<>();
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClickListener(View view, int position);
     }
 
@@ -84,8 +89,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyRecycl
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getOnItemClickListener() != null){
-                    getOnItemClickListener().onItemClickListener(v,position);
+                if (getOnItemClickListener() != null) {
+                    getOnItemClickListener().onItemClickListener(v, position);
                 }
             }
         });

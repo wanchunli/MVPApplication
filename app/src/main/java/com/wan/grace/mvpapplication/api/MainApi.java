@@ -13,10 +13,11 @@ import retrofit2.http.Url;
 import rx.Observable;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * get Zhihu with retrofit
+ * 请求方法接口
+ * MainApi
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:31
  */
 public interface MainApi {
 

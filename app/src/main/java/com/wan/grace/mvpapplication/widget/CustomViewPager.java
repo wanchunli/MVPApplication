@@ -7,6 +7,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * 改写ViewPager
+ * CustomViewPager
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:34
+ */
 public class CustomViewPager extends ViewPager {
 
     public CustomViewPager(Context context) {

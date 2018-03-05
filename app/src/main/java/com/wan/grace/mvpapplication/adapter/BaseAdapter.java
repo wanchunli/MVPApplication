@@ -6,17 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+
 import com.wan.grace.mvpapplication.utils.CommonViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/9/24.
+ * 所有Adapter的基类
+ * BaseAdapter
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:27
  */
-public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
+public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
     public final static int STATUS_LOADING_MORE = 0;//加载更多
-    public final static int  STATUS_EMPTY = 1;//数据为空
+    public final static int STATUS_EMPTY = 1;//数据为空
     public final static int STATUS_LOADING = 2;//正在加载
     public final static int STATUS_LOAD_ALL = 3;//加载完成
 
@@ -34,18 +39,19 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
     }
 
 
-    public String getLoadingStatus(){
-        if(loadingstatus == 1){
+    public String getLoadingStatus() {
+        if (loadingstatus == 1) {
             return "数据为空";
-        }else if(loadingstatus == 2){
+        } else if (loadingstatus == 2) {
             return "正在加载...";
-        }else if(loadingstatus == 3){
+        } else if (loadingstatus == 3) {
             return "已加载全部";
-        }else{
+        } else {
             return "加载更多";
         }
     }
-    public void refreshFooterView(long totalCount){
+
+    public void refreshFooterView(long totalCount) {
         if (totalCount == 0) {
             setLoadingstatus(BaseAdapter.STATUS_EMPTY);
         } else {
@@ -56,7 +62,8 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
             }
         }
     }
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onItemClickListener(View view, int position);
     }
 
@@ -67,8 +74,9 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
     public OnItemClickListener getOnItemClickListener() {
         return onItemClickListener;
     }
+
     //删除
-    public interface OnItemDeleteClickListener{
+    public interface OnItemDeleteClickListener {
         void onItemDeleteClickListener(View view, int position);
     }
 
@@ -82,7 +90,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
 
 
     //checkBox
-    public interface OnCheckItemClickListener{
+    public interface OnCheckItemClickListener {
         void onCheckItemClickListener(CompoundButton view, int position);
     }
 
@@ -104,15 +112,15 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
     }
 
     public List<T> getList() {
-        if(list == null){
+        if (list == null) {
             list = new ArrayList<>();
         }
         return list;
     }
 
 
-    public View getView(ViewGroup viewGroup, int resId){
-        return LayoutInflater.from(context).inflate(resId,viewGroup,false);
+    public View getView(ViewGroup viewGroup, int resId) {
+        return LayoutInflater.from(context).inflate(resId, viewGroup, false);
     }
 
     @Override
@@ -127,6 +135,6 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>{
 
     @Override
     public int getItemCount() {
-        return list == null ? 0:list.size();
+        return list == null ? 0 : list.size();
     }
 }

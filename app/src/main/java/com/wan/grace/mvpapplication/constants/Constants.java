@@ -1,9 +1,12 @@
 package com.wan.grace.mvpapplication.constants;
 
 /**
- * Created by 开发部 on 2018/1/8.
+ * app所有常量
+ * Constants
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:21
  */
-
 public class Constants {
 
     /**

@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 开发部 on 2018/1/3.
+ * ViewPager适配器
+ * CustomViewPagerAdapter
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:28
  */
-
 public class CustomViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragments = new ArrayList<>();
 

@@ -29,10 +29,11 @@ import java.lang.reflect.Field;
 import butterknife.ButterKnife;
 
 /**
- * Created by Werb on 2016/7/25.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * Base of Activity
+ * 所有Activity的基类
+ * MVPBaseActivity
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:17
  */
 public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
@@ -73,16 +74,18 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     }
 
-    public void initListener(){
+    public void initListener() {
 
     }
 
     int flag = 0;
+
     public void netListener() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         connectivityManager.requestNetwork(new NetworkRequest.Builder().build(),
                 new ConnectivityManager.NetworkCallback() {
-                    @Override public void onAvailable(Network network) {
+                    @Override
+                    public void onAvailable(Network network) {
                         super.onAvailable(network);
                         if (flag != 0) {
                             netMobile = NetUtil.getNetWorkState(MVPBaseActivity.this);

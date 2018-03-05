@@ -1,8 +1,11 @@
 package com.wan.grace.mvpapplication.constants;
 
 /**
+ * 广播用的所有action
  * Actions
- * Created by hzwangchenyan on 2016/1/22.
+ * author wanchun
+ * email 1596900283@qq.com
+ * create 2018/3/5 14:21
  */
 public interface Actions {
     String ACTION_MEDIA_PLAY_PAUSE = "com.wan.grace.graceplayer.ACTION_MEDIA_PLAY_PAUSE";
