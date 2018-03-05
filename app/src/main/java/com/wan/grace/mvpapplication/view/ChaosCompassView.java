@@ -59,7 +59,6 @@ public class ChaosCompassView extends View {
     private Path mOutsideTriangle;
     //外接圆小三角形的Path
     private Path mCircumTriangle;
-
     //NESW 文字笔 和文字外接矩形
     private Paint mNorthPaint;
     private Paint mOthersPaint;
@@ -72,10 +71,8 @@ public class ChaosCompassView extends View {
     private Rect mThirdRect;
     //圆心数字矩形
     private Rect mCenterTextRect;
-
     //中心文字笔
     private Paint mCenterPaint;
-
     //内心圆是一个颜色辐射渐变的圆
     private Shader mInnerShader;
     private Paint mInnerPaint;
@@ -88,7 +85,6 @@ public class ChaosCompassView extends View {
     private float mCameraRotateY;
     //camera最大旋转角度
     private float mMaxCameraRotate = 10;
-
     // camera绕X轴旋转的角度
     private float mCameraTranslateX;
     // camera绕Y轴旋转的角度
@@ -134,12 +130,10 @@ public class ChaosCompassView extends View {
         mDarkRedPaint.setAntiAlias(true);
         mDarkRedPaint.setColor(context.getResources().getColor(R.color.darkRed));
 
-
         mDeepGrayPaint = new Paint();
         mDeepGrayPaint.setStyle(Paint.Style.STROKE);
         mDeepGrayPaint.setAntiAlias(true);
         mDeepGrayPaint.setColor(context.getResources().getColor(R.color.deepGray));
-
 
         mLightGrayPaint = new Paint();
         mLightGrayPaint.setStyle(Paint.Style.FILL);
@@ -207,9 +201,7 @@ public class ChaosCompassView extends View {
 
         mCameraMatrix = new Matrix();
         mCamera = new Camera();
-
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -231,7 +223,6 @@ public class ChaosCompassView extends View {
         drawCenterText();
     }
 
-
     /**
      * 设置camera相关
      */
@@ -251,12 +242,10 @@ public class ChaosCompassView extends View {
     }
 
     private void drawInnerCricle() {
-
         mInnerShader = new RadialGradient(width / 2, mOutSideRadius + mTextHeight, mCircumRadius - 40, Color.parseColor("#323232"),
                 Color.parseColor("#000000"), Shader.TileMode.CLAMP);
         mInnerPaint.setShader(mInnerShader);
         mCanvas.drawCircle(width / 2, mOutSideRadius + mTextHeight, mCircumRadius - 40, mInnerPaint);
-
     }
 
     private void drawCenterText() {
@@ -265,7 +254,6 @@ public class ChaosCompassView extends View {
         int centerTextWidth = mCenterTextRect.width();
         int centerTextHeight = mCenterTextRect.height();
         mCanvas.drawText(centerText, width / 2 - centerTextWidth / 2, mTextHeight + mOutSideRadius + centerTextHeight / 5, mCenterPaint);
-
     }
 
     private void drawCompassDegreeScale() {
@@ -286,13 +274,10 @@ public class ChaosCompassView extends View {
         mSamllDegreePaint.getTextBounds("30", 0, 1, mThirdRect);
         int mThirdTextWidth = mThirdRect.width();
         int mThirdTextHeight = mThirdRect.height();
-
         mCanvas.rotate(-val, width / 2, mOutSideRadius + mTextHeight);
-
 
         //画刻度线
         for (int i = 0; i < 240; i++) {
-
             if (i == 0 || i == 60 || i == 120 || i == 180) {
                 mCanvas.drawLine(getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 10,
                         getWidth() / 2, mTextHeight + mOutSideRadius - mCircumRadius + 30, mDeepGrayPaint);
@@ -328,7 +313,6 @@ public class ChaosCompassView extends View {
             mCanvas.rotate(1.5f, mCenterX, mOutSideRadius + mTextHeight);
         }
         mCanvas.restore();
-
     }
 
     /**
@@ -359,7 +343,6 @@ public class ChaosCompassView extends View {
             mCanvas.drawArc(width / 2 - mCircumRadius, mTextHeight + mOutSideRadius - mCircumRadius,
                     width / 2 + mCircumRadius, mTextHeight + mOutSideRadius + mCircumRadius, -95, -valCompare, false, mAnglePaint);
         }
-
         mCanvas.restore();
     }
 
@@ -381,7 +364,6 @@ public class ChaosCompassView extends View {
         mOutsideTriangle.lineTo(width / 2 + mTriangleSide / 2, mTextHeight);
         mOutsideTriangle.close();
         mCanvas.drawPath(mOutsideTriangle, mOutSideCircumPaint);
-
         //画圆弧
         mDarkRedPaint.setStrokeWidth((float) 5);
         mLightGrayPaint.setStrokeWidth((float) 5);
@@ -418,7 +400,6 @@ public class ChaosCompassView extends View {
         int mTextWidth = mTextRect.width();
         //让文字水平居中显示
         mCanvas.drawText(text, width / 2 - mTextWidth / 2, mTextHeight / 2, mTextPaint);
-
     }
 
     @Override
@@ -473,7 +454,6 @@ public class ChaosCompassView extends View {
                 break;
         }
         return true;
-
     }
 
     private void startRestore() {
@@ -566,6 +546,5 @@ public class ChaosCompassView extends View {
         percentArr[1] = percentY;
         return percentArr;
     }
-
 
 }
