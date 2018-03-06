@@ -61,7 +61,7 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         XAxis xAxis = weatherChart.getXAxis();
         xAxis.setPosition(XAxisPosition.BOTTOM);
         xAxis.setTypeface(mTf);
-        xAxis.setLabelCount(8,true);
+        xAxis.setLabelCount(5,true);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -73,7 +73,7 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
 
 //                long millis = TimeUnit.HOURS.toMillis((long) value);
 //                long hours = TimeUnit.HOURS.toHours((long) value);
-                long hours = TimeUnit.HOURS.toHours((long) 0.0f);
+                long hours = TimeUnit.HOURS.toHours((long) 0.00f);
                 return mFormat.format(new Date(hours));
             }
         });
@@ -111,8 +111,11 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
      */
     private LineData generateDataLine() {
         ArrayList<Entry> e1 = new ArrayList<Entry>();
-        for (int i = 0; i < 24; i++) {
-            e1.add(new Entry(i, (int) (Math.random() * 65) + 40));
+        // now in hours
+        long now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis());
+        float from = now;
+        for (float i = 0; i < 24; i++) {
+            e1.add(new Entry(i, (int) (Math.random() * 10) + 10));
         }
         LineDataSet d1 = new LineDataSet(e1, "weather_data1");
         d1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -120,10 +123,12 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         d1.setCircleRadius(4.5f);
         d1.setHighLightColor(Color.rgb(244, 117, 117));
         d1.setDrawValues(false);
+        d1.setDrawCircleHole(false);
+        d1.setDrawCircles(false);
 
         ArrayList<Entry> e2 = new ArrayList<Entry>();
         for (int i = 0; i < 12; i++) {
-            e2.add(new Entry(i, e1.get(i).getY() - 30));
+            e2.add(new Entry(i, (int) (Math.random() * 10) + 10));
         }
         LineDataSet d2 = new LineDataSet(e2, "weather_data2");
         d2.setLineWidth(2.5f);
@@ -134,7 +139,7 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         d2.setDrawValues(false);
         ArrayList<ILineDataSet> sets = new ArrayList<ILineDataSet>();
         sets.add(d1);
-        sets.add(d2);
+//        sets.add(d2);
         LineData cd = new LineData(sets);
         return cd;
     }
