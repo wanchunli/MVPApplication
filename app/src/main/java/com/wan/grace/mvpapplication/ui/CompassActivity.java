@@ -59,9 +59,9 @@ public class CompassActivity extends MVPBaseActivity {
         };
         mSensorManager.registerListener(mSensorEventListener,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_GAME);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.black));
-        initToolBar(toolbar, "", true, true);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.black));
+        initToolBar(mToolbar, "", true, true);
     }
 
     @Override

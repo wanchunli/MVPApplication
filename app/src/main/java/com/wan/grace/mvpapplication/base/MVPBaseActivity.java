@@ -53,10 +53,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }
-        netListener();
         setContentView(provideContentViewId());//布局
-        init();
         ButterKnife.bind(this);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置
@@ -67,6 +66,8 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             }
         }
         initViews();
+        init();
+        netListener();
         initListener();
     }
 

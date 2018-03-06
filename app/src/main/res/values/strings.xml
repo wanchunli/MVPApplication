@@ -15,4 +15,7 @@
     <string name="select_qr_code_from_ablum">从相册选取二维码</string>
     <string name="scan_fail">扫描失败</string>
 
+    <string name="compass_name">指南针</string>
+    <string name="weather_sign">天气</string>
+
 </resources>
