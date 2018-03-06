@@ -59,11 +59,19 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         weatherChart.setDrawGridBackground(false);
 
         XAxis xAxis = weatherChart.getXAxis();
+        //横轴内容显示位置
         xAxis.setPosition(XAxisPosition.BOTTOM);
+        //字体配置
         xAxis.setTypeface(mTf);
-        xAxis.setLabelCount(5,true);
+        //设置横轴标签数量
+//        xAxis.setLabelCount(6,true);
+        //是否显示横向网格线
         xAxis.setDrawGridLines(false);
+        //是否显示x轴线
         xAxis.setDrawAxisLine(true);
+        //配置x轴标签间隔
+        xAxis.setGranularity(1f); // one hour
+        //配置数值格式(当前为时间格式)
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
             private SimpleDateFormat mFormat = new SimpleDateFormat("HH:mm");
@@ -71,17 +79,19 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
 
-//                long millis = TimeUnit.HOURS.toMillis((long) value);
+                long millis = TimeUnit.HOURS.toMillis((long) value);
 //                long hours = TimeUnit.HOURS.toHours((long) value);
-                long hours = TimeUnit.HOURS.toHours((long) 0.00f);
-                return mFormat.format(new Date(hours));
+//                long millis = TimeUnit.HOURS.toNanos((long) value);
+                return mFormat.format(new Date(millis));
             }
         });
 
         YAxis leftAxis = weatherChart.getAxisLeft();
         leftAxis.setTypeface(mTf);
         leftAxis.setDrawGridLines(false);
-        leftAxis.setLabelCount(5, false);
+        leftAxis.setAxisMaximum(50f);
+        leftAxis.setAxisMinimum(-20f);
+//        leftAxis.setLabelCount(5, false);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
         YAxis rightAxis = weatherChart.getAxisRight();
