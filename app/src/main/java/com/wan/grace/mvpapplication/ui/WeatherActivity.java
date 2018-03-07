@@ -1,8 +1,10 @@
 package com.wan.grace.mvpapplication.ui;
 
+import android.app.AlarmManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -20,14 +22,17 @@ import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.ui.presenter.WeatherPresenter;
 import com.wan.grace.mvpapplication.ui.view.WeatherView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
-public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresenter> implements WeatherView{
+public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresenter> implements WeatherView {
 
     @BindView(R.id.weather_chart)
     LineChart weatherChart;
@@ -49,11 +54,13 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
     }
 
     @Override
-    public void init(){
+    public void init() {
         //设置toolsbar
         initToolBar(mToolbar, "", true, true);
         //字体设置
         mTf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.setTimeZone("Asia/Hong_Kong");
         // apply styling
         weatherChart.getDescription().setEnabled(false);
         weatherChart.setDrawGridBackground(false);
@@ -74,21 +81,29 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         //配置数值格式(当前为时间格式)
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
+            Calendar calendar = Calendar.getInstance();
             private SimpleDateFormat mFormat = new SimpleDateFormat("HH:mm");
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
 
-                long millis = TimeUnit.HOURS.toMillis((long) value);
-//                long hours = TimeUnit.HOURS.toHours((long) value);
-//                long millis = TimeUnit.HOURS.toNanos((long) value);
-                return mFormat.format(new Date(millis));
+                Log.i("value", value + "");
+                try {
+                    long millis = TimeUnit.HOURS.toMillis((long) value);
+                    calendar.setTime(mFormat.parse("0"));
+                } catch (ParseException e) {
+                    Log.i("print", e.toString());
+                    e.printStackTrace();
+                }
+
+                return mFormat.format(calendar.getTime());
             }
         });
 
         YAxis leftAxis = weatherChart.getAxisLeft();
         leftAxis.setTypeface(mTf);
         leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawZeroLine(true);
         leftAxis.setAxisMaximum(50f);
         leftAxis.setAxisMinimum(-20f);
 //        leftAxis.setLabelCount(5, false);
@@ -104,9 +119,10 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
 
         // set data
         weatherChart.setData(generateDataLine());
-        weatherChart.animateX(750);
+        weatherChart.animateY(1000);
+//        weatherChart.animateXY(2000,500);
         // do not forget to refresh the chart
-        // holder.chart.invalidate();
+        weatherChart.invalidate();
     }
 
     @Override
@@ -125,7 +141,7 @@ public class WeatherActivity extends MVPBaseActivity<WeatherView, WeatherPresent
         long now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis());
         float from = now;
         for (float i = 0; i < 24; i++) {
-            e1.add(new Entry(i, (int) (Math.random() * 10) + 10));
+            e1.add(new Entry(i, (int) (Math.random() * 10) + 20));
         }
         LineDataSet d1 = new LineDataSet(e1, "weather_data1");
         d1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
