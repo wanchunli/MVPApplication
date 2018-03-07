@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.lqr.imagepicker.ImagePicker;
 import com.lqr.imagepicker.bean.ImageItem;
 import com.lqr.imagepicker.ui.ImageGridActivity;
+import com.wan.grace.mvpapplication.AppContext;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.base.MVPBaseActivity;
 import com.wan.grace.mvpapplication.thread.ThreadPoolFactory;
@@ -37,6 +38,7 @@ public class ScanActivity extends MVPBaseActivity<ScanView, ScanPresenter> imple
         QRCodeView.Delegate, View.OnClickListener {
 
     public static final int IMAGE_PICKER = 100;
+    private static final int PHOTO_PICKED_WITH_DATA = 3021;
     @BindView(R.id.zxingview)
     ZXingView mZxingview;
     @BindView(R.id.light_control)
@@ -49,6 +51,7 @@ public class ScanActivity extends MVPBaseActivity<ScanView, ScanPresenter> imple
     RelativeLayout moreLayout;
     private FrameLayout mView;
     private PopupWindow mPopupWindow;
+    private AppContext ac;
 
     @Override
     protected int provideContentViewId() {
@@ -68,7 +71,10 @@ public class ScanActivity extends MVPBaseActivity<ScanView, ScanPresenter> imple
     @Override
     public void initViews() {
         super.initViews();
-
+        ac = (AppContext)getApplicationContext();
+        ac.setImageMultiMode(false);
+        ac.setCanCrop(true);
+        ac.setCropStyle(1);
 //        initToolBar(mToolbar, getString(R.string.qrcode_scan), true, true);
     }
 
@@ -119,7 +125,9 @@ public class ScanActivity extends MVPBaseActivity<ScanView, ScanPresenter> imple
             tv.setOnClickListener(v -> {
                 mPopupWindow.dismiss();
                 Intent intent = new Intent(ScanActivity.this, ImageGridActivity.class);
-                startActivityForResult(intent, IMAGE_PICKER);
+//                startActivityForResult(intent, IMAGE_PICKER);
+                startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
+
             });
         }
         mPopupWindow = PopupWindowUtils.getPopupWindowAtLocation(mView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, getWindow().getDecorView().getRootView(), Gravity.BOTTOM, 0, 0);
@@ -184,7 +192,7 @@ public class ScanActivity extends MVPBaseActivity<ScanView, ScanPresenter> imple
                         public void run() {
                             String result = QRCodeDecoder.syncDecodeQRCode(images.get(0).path);
                             if (TextUtils.isEmpty(result)) {
-                                UIUtils.showToast(UIUtils.getString(R.string.scan_fail));
+//                                UIUtils.showToast(UIUtils.getString(R.string.scan_fail));
                             } else {
                                 handleResult(result);
                             }
