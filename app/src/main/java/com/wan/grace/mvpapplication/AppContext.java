@@ -35,6 +35,7 @@ public class AppContext extends Application {
 
     private static AppContext sInstance;
     private AppShared mAppShared;
+    private ImagePicker imagePicker = ImagePicker.getInstance();
     /**
      * 网络类型
      */
@@ -57,7 +58,7 @@ public class AppContext extends Application {
      * 初始化仿微信控件ImagePicker
      */
     private void initImagePicker() {
-        ImagePicker imagePicker = ImagePicker.getInstance();
+
         imagePicker.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
@@ -70,7 +71,7 @@ public class AppContext extends Application {
             }
         });
         //设置图片加载器
-        imagePicker.setMultiMode(false);
+        imagePicker.setMultiMode(true);
         imagePicker.setShowCamera(true);  //显示拍照按钮
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
@@ -80,6 +81,44 @@ public class AppContext extends Application {
         imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
         imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+    }
+
+    /**
+     * 动态设置图片选择器的单选与多选模式
+     *
+     * @param bool
+     */
+    public void setImageMultiMode(boolean bool) {
+        imagePicker.setMultiMode(bool);
+    }
+
+    /**
+     * 动态设置图片选择器是否可剪裁
+     *
+     * @param bool
+     */
+    public void setCanCrop(boolean bool) {
+        imagePicker.setCrop(bool);
+    }
+
+    /**
+     * 动态设置图片选择器剪裁形状
+     *
+     * @param cropFlag
+     */
+    public void setCropStyle(int cropFlag) {
+        switch (cropFlag) {
+            case 0:
+                imagePicker.setStyle(CropImageView.Style.RECTANGLE);
+                break;
+            case 1:
+                imagePicker.setStyle(CropImageView.Style.CIRCLE);
+                break;
+            default:
+                imagePicker.setStyle(CropImageView.Style.RECTANGLE);
+                break;
+        }
+
     }
 
     @Override
@@ -156,22 +195,24 @@ public class AppContext extends Application {
     }
 
     int flag = 0;
+
     public void netListener() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         connectivityManager.requestNetwork(new NetworkRequest.Builder().build(),
                 new ConnectivityManager.NetworkCallback() {
-                    @Override public void onAvailable(Network network) {
+                    @Override
+                    public void onAvailable(Network network) {
                         super.onAvailable(network);
                         if (flag != 0) {
                             netMobile = NetUtil.getNetWorkState(getApplicationContext());
                             if (netMobile == 1) {
-                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.wifi_connected), Toast.LENGTH_SHORT).show();
 //                                showTips(getString(R.string.wifi_connected));
                             } else if (netMobile == 0) {
-                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.wifi_connected), Toast.LENGTH_SHORT).show();
 //                                showTips(getString(R.string.mobile_connected));
                             } else if (netMobile == -1) {
-                                Toast.makeText(getApplicationContext(),getString(R.string.wifi_connected),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.wifi_connected), Toast.LENGTH_SHORT).show();
 //                                showTips(getString(R.string.no_net_connected));
                             }
                         }
