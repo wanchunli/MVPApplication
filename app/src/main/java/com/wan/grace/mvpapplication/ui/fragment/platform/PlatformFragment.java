@@ -1,5 +1,6 @@
 package com.wan.grace.mvpapplication.ui.fragment.platform;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +20,7 @@ import com.wan.grace.mvpapplication.base.MVPBaseFragment;
 import com.wan.grace.mvpapplication.bean.Movie;
 import com.wan.grace.mvpapplication.bean.MovieSubject;
 import com.wan.grace.mvpapplication.cache.AppShared;
+import com.wan.grace.mvpapplication.ui.AttendActivity;
 import com.wan.grace.mvpapplication.ui.fragment.banner.BannerViewHolder;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -44,6 +46,8 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
     MZBannerView mMZBanner;
     @BindView(R.id.map_check)
     LinearLayout mapCheckLayout;
+    @BindView(R.id.my_attendance)
+    LinearLayout AttendanceLayout;
     @BindView(R.id.function_recyclerview)
     RecyclerView funRecyclerview;
     FunctionAdpter functionAdpter;
@@ -130,6 +134,13 @@ public class PlatformFragment extends MVPBaseFragment<PlatFormView, PlatFormPres
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        AttendanceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), AttendActivity.class);
+                startActivity(it);
             }
         });
     }

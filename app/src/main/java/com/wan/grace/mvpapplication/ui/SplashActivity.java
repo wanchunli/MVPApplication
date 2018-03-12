@@ -29,7 +29,7 @@ public class SplashActivity extends MVPBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!hasPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            requestPermissions(Constants.ASSCESS_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION);
+            requestPermissions(Constants.ASSCESS_LOCATION_CODE, Manifest.permission.ACCESS_COARSE_LOCATION);
         }
         if (!hasPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             requestPermissions(Constants.WRITE_EXTERNAL_CODE, Manifest.permission.WRITE_EXTERNAL_STORAGE);

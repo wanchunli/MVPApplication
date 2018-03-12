@@ -74,4 +74,7 @@ dependencies {
     implementation files('libs/AMap_Location_V3.8.0_20180201.jar')
     implementation files('libs/AMap_Search_V5.7.0_20171229.jar')
     implementation files('libs/Android_Map3D_SDK_V6.0.0_20180211.jar')
+    //    //日期选择器
+    //    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
+    implementation project(':DatePicker')
 }
