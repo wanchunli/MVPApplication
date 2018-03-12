@@ -11,6 +11,7 @@ public class ApiFactory {
 
     protected static final Object monitor = new Object();
     static MainApi mainApiSingleton = null;
+    static WeatherApi weatherApiSingleton = null;
 
     //return Singleton
     public static MainApi getMainApiSingleton() {
@@ -19,6 +20,16 @@ public class ApiFactory {
                 mainApiSingleton = new ApiRetrofit().getMainApiService();
             }
             return mainApiSingleton;
+        }
+    }
+
+    //return Singleton
+    public static WeatherApi getWeatherApiSingleton() {
+        synchronized (monitor) {
+            if (weatherApiSingleton == null) {
+                weatherApiSingleton = new ApiRetrofit().getWeatherApiService();
+            }
+            return weatherApiSingleton;
         }
     }
 

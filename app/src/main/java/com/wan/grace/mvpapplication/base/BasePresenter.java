@@ -1,6 +1,9 @@
 package com.wan.grace.mvpapplication.base;
 
 import com.wan.grace.mvpapplication.AppContext;
+import com.wan.grace.mvpapplication.api.ApiFactory;
+import com.wan.grace.mvpapplication.api.MainApi;
+import com.wan.grace.mvpapplication.api.WeatherApi;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -18,9 +21,8 @@ public abstract class BasePresenter<V> {
 
     public AppContext ac;
 
-//    public static final MainApi mainApi = ApiFactory.getMainApiSingleton();
-//
-//    public static final NetPlayApi netPlayApi = ApiFactory.getNetPlayApiSingleton();
+    public static final MainApi mainApi = ApiFactory.getMainApiSingleton();
+    public static final WeatherApi weatherApi = ApiFactory.getWeatherApiSingleton();
 
     public void attachView(V view) {
         mViewRef = new WeakReference<V>(view);

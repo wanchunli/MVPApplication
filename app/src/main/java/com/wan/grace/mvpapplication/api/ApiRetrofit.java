@@ -26,14 +26,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiRetrofit {
 
     public MainApi mainApiService;
-    //    public static final String MAIN_BASE_URL = "http://api.map.baidu.com/telematics/v3/";
     public static final String BASE_URL = "https://api.douban.com/v2/movie/";
+    public WeatherApi weatherApiService;
+    public static final String WEATHER_BASE_URL = "http://api.map.baidu.com/telematics/v3/";
 //    public static final String NET_PLAY_BASE_URL = "http://news-at.zhihu.com/api/4/";
 //    public static final String GANK_BASE_URL = "http://gank.io/api/";
 //    public static final String DAILY_BASE_URL = "http://app3.qdaily.com/app3/";
 
     public MainApi getMainApiService() {
         return mainApiService;
+    }
+
+    public WeatherApi getWeatherApiService() {
+        return weatherApiService;
     }
 
     ApiRetrofit() {
@@ -84,12 +89,12 @@ public class ApiRetrofit {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
-//        Retrofit retrofit_netplay = new Retrofit.Builder()
-//                .baseUrl(NET_PLAY_BASE_URL)
-//                .client(client)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .build();
+        Retrofit retrofit_weather = new Retrofit.Builder()
+                .baseUrl(WEATHER_BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
 //
 //        Retrofit retrofit_zhihu = new Retrofit.Builder()
 //                .baseUrl(NET_PLAY_BASE_URL)
@@ -113,6 +118,7 @@ public class ApiRetrofit {
 //                .build();
 
         mainApiService = retrofit_main.create(MainApi.class);
+        weatherApiService = retrofit_weather.create(WeatherApi.class);
     }
 
 }

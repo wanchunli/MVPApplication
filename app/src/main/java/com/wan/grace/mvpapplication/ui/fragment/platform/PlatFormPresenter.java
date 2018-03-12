@@ -20,7 +20,6 @@ import rx.schedulers.Schedulers;
 public class PlatFormPresenter extends BasePresenter<PlatFormView> {
     private Context context;
     private PlatFormView platFormView;
-    public static final MainApi movieApi = ApiFactory.getMainApiSingleton();
 
     public PlatFormPresenter(Context context) {
         this.context = context;
@@ -40,7 +39,7 @@ public class PlatFormPresenter extends BasePresenter<PlatFormView> {
     }
 
     public void getBannerData() {
-        movieApi.getTop250(0, 10)
+        mainApi.getTop250(0, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieSubject -> {

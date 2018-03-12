@@ -64,11 +64,14 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5-alpha-2'
     //毛玻璃效果
     compile 'com.github.mmin18:realtimeblurview:1.0.6'
-
     //二维码扫描
     compile 'com.google.zxing:core:3.3.0'
     compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
     compile 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
     //图库选择
     compile 'com.lqr.imagepicker:library:1.0.0'
+    implementation files('libs/Amap_2DMap_V5.2.0_20170627.jar')
+    implementation files('libs/AMap_Location_V3.8.0_20180201.jar')
+    implementation files('libs/AMap_Search_V5.7.0_20171229.jar')
+    implementation files('libs/Android_Map3D_SDK_V6.0.0_20180211.jar')
 }

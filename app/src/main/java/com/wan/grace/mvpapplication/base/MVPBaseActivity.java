@@ -20,6 +20,11 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.wan.grace.mvpapplication.R;
 import com.wan.grace.mvpapplication.constants.Constants;
 import com.wan.grace.mvpapplication.utils.NetUtil;
@@ -35,11 +40,17 @@ import butterknife.ButterKnife;
  * email 1596900283@qq.com
  * create 2018/3/5 14:17
  */
-public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements AMapLocationListener{
 
     protected T mPresenter;
     protected Toolbar mToolbar;
     private String TAG = "MVPBaseActivity";
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+    public double latitude = 0;
+    public double longitude = 0;
     /**
      * 网络类型
      */
@@ -255,6 +266,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             case Constants.OPEN_CAMERA_CODE:
                 doOpenCameraPermission();
                 break;
+            case Constants.ASSCESS_LOCATION_CODE:
+                initLocationOption();
+                break;
         }
 
     }
@@ -288,4 +302,35 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     }
 
+    public void initLocationOption() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(this);
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Battery_Saving，低功耗模式。
+        mLocationOption.setLocationMode(AMapLocationMode.Battery_Saving);
+        //获取一次定位结果：
+        //该方法默认为false。
+        mLocationOption.setOnceLocation(true);
+        //获取最近3s内精度最高的一次定位结果：
+        //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
+        mLocationOption.setOnceLocationLatest(true);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //单位是毫秒，默认30000毫秒，建议超时时间不要低于8000毫秒。
+        mLocationOption.setHttpTimeOut(20000);
+        //关闭缓存机制
+        mLocationOption.setLocationCacheEnable(false);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+
+    }
 }

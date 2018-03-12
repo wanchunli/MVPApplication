@@ -16,4 +16,6 @@ public class Constants {
     public static final int READ_EXTERNAL_CODE = 0X02;
     public static final int READ_CONTACT_CODE = 0X03;
     public static final int OPEN_CAMERA_CODE = 0X04;
+    public static final int ASSCESS_LOCATION_CODE = 0X05;
+    public static final int ACCESS_FINE_LOCATION_CODE = 0X06;
 }
