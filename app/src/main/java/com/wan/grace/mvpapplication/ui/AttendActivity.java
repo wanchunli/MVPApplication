@@ -129,9 +129,9 @@ public class AttendActivity extends MVPBaseActivity<AttendView, AttendPresenter>
         picker.setFestivalDisplay(true);
         //是否对当天标记
         picker.setTodayDisplay(true);
-        //节假日
+        //设置标记节假日
         picker.setHolidayDisplay(false);
-        //设置补休
+        //设置标记补休
         picker.setDeferredDisplay(false);
         picker.setMode(DPMode.NONE);
         picker.setDPDecor(new DPDecor() {
