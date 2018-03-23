@@ -46,6 +46,24 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/note_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/touch_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/note_name"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/weather_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

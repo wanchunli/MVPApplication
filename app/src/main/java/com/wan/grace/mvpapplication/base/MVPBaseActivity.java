@@ -90,8 +90,8 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     }
 
+    //网络状态监听
     int flag = 0;
-
     public void netListener() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         connectivityManager.requestNetwork(new NetworkRequest.Builder().build(),
@@ -126,25 +126,6 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         toolbar.setTitle(name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
-    }
-
-    public void reSetToolbarHeight(Toolbar toolbar) {
-        try {
-            Field f = Toolbar.class.getDeclaredField("mNavButtonView");
-            f.setAccessible(true);
-            ImageButton mNavButtonView = (ImageButton) f.get(toolbar);
-            if (mNavButtonView != null) {
-                Toolbar.LayoutParams l = (Toolbar.LayoutParams) mNavButtonView.getLayoutParams();
-                l.gravity = Gravity.CENTER_VERTICAL;
-                l.height += 100;
-                l.width += 100;
-                mNavButtonView.setLayoutParams(l);
-            }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

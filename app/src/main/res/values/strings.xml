@@ -16,6 +16,7 @@
     <string name="scan_fail">扫描失败</string>
 
     <string name="compass_name">指南针</string>
+    <string name="note_name">便签</string>
     <string name="weather_sign">天气</string>
     <string name="string_help">帮助</string>
     <string name="string_suggestion">意见反馈</string>

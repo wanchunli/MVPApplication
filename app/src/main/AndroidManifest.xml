@@ -87,7 +87,8 @@
         </provider>
 
         <activity android:name=".ui.WeatherActivity" />
-        <activity android:name=".ui.AttendActivity"></activity>
+        <activity android:name=".ui.AttendActivity" />
+        <activity android:name=".ui.NoteActivity"></activity>
     </application>
 
 </manifest>

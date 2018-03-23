@@ -21,6 +21,8 @@ public class ToolsFragment extends MVPBaseFragment<ToolsView,ToolsPresenter>
 
     @BindView(R.id.compass_layout)
     RelativeLayout compassLayout;
+    @BindView(R.id.note_layout)
+    RelativeLayout noteLayout;
     @BindView(R.id.weather_layout)
     RelativeLayout weatherLayout;
 
@@ -42,6 +44,7 @@ public class ToolsFragment extends MVPBaseFragment<ToolsView,ToolsPresenter>
     @Override
     protected void initView(View rootView) {
         compassLayout.setOnClickListener(this);
+        noteLayout.setOnClickListener(this);
         weatherLayout.setOnClickListener(this);
     }
 
@@ -51,6 +54,10 @@ public class ToolsFragment extends MVPBaseFragment<ToolsView,ToolsPresenter>
             case R.id.compass_layout:
                 Intent it_compass = new Intent(getActivity(), CompassActivity.class);
                 startActivity(it_compass);
+                break;
+            case R.id.note_layout:
+                Intent it_note = new Intent(getActivity(), CompassActivity.class);
+                startActivity(it_note);
                 break;
             case R.id.weather_layout:
                 Intent it_weather = new Intent(getActivity(), WeatherActivity.class);
